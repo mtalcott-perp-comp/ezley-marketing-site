@@ -1,0 +1,164 @@
+---
+layout: landing
+permalink: /trust/
+title: "Trust & Safety"
+description: "Ezley operates the trust layer for high-value peer-to-peer transactions: escrow-held funds, identity-verified sellers, and a defined dispute process — built in, not bolted on."
+---
+{% assign copy = site.data.copy['en-US'].trust %}
+{% assign cfg = site.data.config %}
+
+{% comment %}
+  /trust — depth surface for the trust pitch.
+
+  FR-MKT-050: identity tiers BASIC / VERIFIED / TRUSTED_SELLER (glossary §5.7 verbatim).
+  FR-MKT-051: escrow flow in plain English (Captured → Released → Paid out).
+  FR-MKT-052: dispute PROCESS only — no numeric SLA / resolution-rate at M0 (Q8).
+  FR-MKT-053: buyer-funds-held principle (P-06) in plain English.
+  FR-MKT-054: wire-or-ACH-above-threshold (P-07) — threshold described, not named numerically here.
+  FR-MKT-055: no dispute statistics at M0 — honest empty.
+{% endcomment %}
+
+<!-- ========================================================================
+     HERO
+     ======================================================================== -->
+<section class="relative overflow-hidden isolate
+                bg-gradient-to-b from-surface to-surface-tint
+                py-20 sm:py-24">
+
+  <div aria-hidden="true" class="pointer-events-none absolute -top-40 -right-40 h-[600px] w-[600px] rounded-full bg-primary/10 blur-3xl"></div>
+
+  <div class="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+    <h1 class="font-display font-bold tracking-tight text-ink
+               text-4xl sm:text-5xl lg:text-6xl leading-[1.1]">
+      {{ copy.hero_headline }}
+    </h1>
+    <p class="mt-6 text-lg sm:text-xl text-ink-muted max-w-prose-tight mx-auto leading-relaxed">
+      {{ copy.intro }}
+    </p>
+  </div>
+</section>
+
+<!-- ========================================================================
+     BUYER FUNDS HELD — FR-MKT-053 (P-06)
+     ======================================================================== -->
+<section class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-24" aria-labelledby="buyer-funds-title">
+  <div class="grid md:grid-cols-2 gap-12 items-center">
+    <div>
+      <h2 id="buyer-funds-title" class="font-display font-bold text-3xl sm:text-4xl text-ink mb-4">
+        {{ copy.buyer_funds_held.title }}
+      </h2>
+      <p class="text-ink-muted text-lg leading-relaxed">
+        {{ copy.buyer_funds_held.body }}
+      </p>
+    </div>
+
+    <!-- Escrow flow diagram — FR-MKT-051 -->
+    <div class="bg-surface-subtle rounded-2xl border border-ink-border p-6">
+      <p class="text-xs font-semibold uppercase tracking-wider text-ink-soft mb-4">
+        Escrow flow
+      </p>
+      <ol class="relative space-y-3 list-none p-0">
+        <li class="flex items-center gap-3">
+          <span class="flex-none h-8 w-8 rounded-lg bg-primary text-white flex items-center justify-center font-display font-bold text-sm">1</span>
+          <span class="font-medium text-ink">Buyer funds Escrow</span>
+          <code class="ml-auto text-xs bg-primary/10 text-primary-ink px-2 py-1 rounded">Captured</code>
+        </li>
+        <li class="flex items-center gap-3">
+          <span class="flex-none h-8 w-8 rounded-lg bg-primary text-white flex items-center justify-center font-display font-bold text-sm">2</span>
+          <span class="font-medium text-ink">Buyer confirms receipt</span>
+          <span class="ml-auto text-xs text-ink-muted">or window passes</span>
+        </li>
+        <li class="flex items-center gap-3">
+          <span class="flex-none h-8 w-8 rounded-lg bg-primary text-white flex items-center justify-center font-display font-bold text-sm">3</span>
+          <span class="font-medium text-ink">Auto-release</span>
+          <code class="ml-auto text-xs bg-primary/10 text-primary-ink px-2 py-1 rounded">Released</code>
+        </li>
+        <li class="flex items-center gap-3">
+          <span class="flex-none h-8 w-8 rounded-lg bg-primary text-white flex items-center justify-center font-display font-bold text-sm">4</span>
+          <span class="font-medium text-ink">Funds settle to seller</span>
+          <code class="ml-auto text-xs bg-primary/10 text-primary-ink px-2 py-1 rounded">Paid out</code>
+        </li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- ========================================================================
+     IDENTITY VERIFICATION — FR-MKT-050 (tiers verbatim from glossary §5.7)
+     ======================================================================== -->
+<section class="bg-surface-subtle border-y border-ink-border" aria-labelledby="identity-title">
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-24">
+    <h2 id="identity-title" class="font-display font-bold text-3xl sm:text-4xl text-ink mb-3">
+      Identity verification
+    </h2>
+    <p class="text-ink-muted mb-10 leading-relaxed max-w-2xl">
+      Every seller and buyer has a verification tier visible on their profile. Higher tiers unlock larger transactions and faster payouts.
+    </p>
+
+    <div class="grid md:grid-cols-3 gap-5">
+      <div class="bg-surface rounded-xl border border-ink-border p-6">
+        <code class="inline-block text-sm font-semibold bg-ink-border/30 text-ink-muted px-3 py-1 rounded mb-4">BASIC</code>
+        <p class="text-ink leading-relaxed">Email verified. New accounts start here.</p>
+      </div>
+      <div class="bg-surface rounded-xl border-2 border-primary/30 p-6">
+        <code class="inline-block text-sm font-semibold bg-primary/10 text-primary-ink px-3 py-1 rounded mb-4">VERIFIED</code>
+        <p class="text-ink leading-relaxed">Email + phone + government ID. Required to sell above per-category thresholds.</p>
+      </div>
+      <div class="bg-surface rounded-xl border-2 border-primary p-6">
+        <code class="inline-block text-sm font-semibold bg-primary text-white px-3 py-1 rounded mb-4">TRUSTED_SELLER</code>
+        <p class="text-ink leading-relaxed">Email + phone + government ID + address + transaction history. Auto-approved listings, faster payout.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========================================================================
+     WIRE / ACH ABOVE THRESHOLD — FR-MKT-054 (P-07)
+     ======================================================================== -->
+<section class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-24" aria-labelledby="wire-or-ach-title">
+  <h2 id="wire-or-ach-title" class="font-display font-bold text-2xl sm:text-3xl text-ink mb-4">
+    {{ copy.wire_or_ach.title }}
+  </h2>
+  <p class="text-ink-muted leading-relaxed">
+    {{ copy.wire_or_ach.body }}
+  </p>
+</section>
+
+<!-- ========================================================================
+     DISPUTE PROCESS — FR-MKT-052 + FR-MKT-055 (Q8: process only, no SLA)
+     ======================================================================== -->
+<section class="bg-surface-subtle border-y border-ink-border" aria-labelledby="disputes-title">
+  <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-24">
+    <h2 id="disputes-title" class="font-display font-bold text-2xl sm:text-3xl text-ink mb-6">
+      Disputes
+    </h2>
+
+    <div class="space-y-5 text-ink-muted leading-relaxed">
+      <p>
+        Disputes follow a defined process. If you and the other party can't
+        resolve a problem directly, you can open a dispute on the transaction.
+      </p>
+      <p>
+        A named Ezley operator handles each case &mdash; not a queue. The
+        adjudication framework is documented, the steps are the same for every
+        case, and either party has the right to escalate.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ========================================================================
+     CTA strip
+     ======================================================================== -->
+<section class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-24 text-center">
+  <h2 class="font-display font-bold text-2xl sm:text-3xl text-ink mb-4">
+    Trust is the product.
+  </h2>
+  <p class="text-ink-muted leading-relaxed mb-8">
+    Everything else &mdash; escrow, identity, dispute resolution, concierge &mdash; is what that means in practice.
+  </p>
+  <a class="btn-primary"
+     href="{{ site.cta.app_url }}/?utm_source={{ site.cta.utm_source }}&amp;utm_campaign=trust&amp;utm_content=footer-cta">
+    Start selling on Ezley
+  </a>
+</section>

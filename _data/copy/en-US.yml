@@ -1,0 +1,190 @@
+# All user-facing strings live here (NFR-MKT-011 — localization-ready).
+# Pages reference these via {{ site.data.copy.en-US.<path> }}.
+# When Spanish localization lands (M18 per P-08), a sibling file at
+# _data/copy/es-MX.yml mirrors this structure.
+
+# ---------- Home page (US1) ----------
+home:
+  hero:
+    headline_vision: "The open marketplace for high-trust, high-value, peer-to-peer commerce."
+    headline_trust:  "Your money stays in escrow until you confirm what you bought."
+    cta_primary:     "Browse listings"
+    cta_secondary:   "Start selling"
+  why_ezley:
+    section_title:   "Why Ezley"
+    rows:
+      - name: "Facebook Marketplace"
+        differentiator: "Captures the conversation but provides no transaction layer."
+        anchor: "Escrow-held funds, identity-verified sellers."
+      - name: "Craigslist"
+        differentiator: "Captures the listing but provides no trust layer."
+        anchor: "Escrow, identity verification, dispute process."
+      - name: "General auction marketplaces"
+        differentiator: "Banned AI shopping assistants from buying on the platform in early 2026 (eBay's 2026-02-20 policy change)."
+        anchor: "Your AI assistant — ChatGPT, Claude, Gemini — can browse, compare, and buy on Ezley."
+      - name: "Category-specific catalog sites"
+        differentiator: "Catalog without escrow. You find the listing — and you're on your own."
+        anchor: "Ezley operates the trust layer the catalog leaves out."
+  trust_signals:
+    - "Wire payment supported on high-value transactions"
+    - "Buyer funds held in escrow until handover confirmed"
+    - "Identity-verified sellers"
+    - "Concierge support in your county"
+  how_it_works_preview:
+    section_title: "How it works"
+    buyer_flow:    "Browse → Offer → Buyer funds Escrow → Handover → Buyer confirms → Auto-release → Seller paid"
+    seller_flow:   "List → Concierge auto-approves (or reviews per tier) → Live → Buyer funds Escrow → Handover → Buyer confirms → Auto-release → Paid out"
+  pricing_teaser:  "Free to list. Pay only when you sell."
+
+# ---------- /tractors (US2) ----------
+tractors:
+  subbrand_chip:    "Ezley Equipment"
+  title_pattern:    "Ezley Equipment — Tractors, Combines, Implements | Ezley"
+  hero:
+    headline:       "Sell your equipment to a verified buyer."
+    sub:            "Wire payment supported. No shipping required. Concierge available in your county."
+    cta_primary:    "Start selling"
+  body_intro:       >-
+                    Ezley Equipment covers tractors, combines, implements,
+                    and attachments — wire-payment friendly, no-shipping-required,
+                    and concierge-supported in your county.
+  trust_signals:
+    - "Wire payment supported — no chargeback risk on a $50K tractor"
+    - "Buyer funds held in escrow until handover confirmed"
+    - "Identity-verified sellers and buyers"
+    - "Concierge support — Ezley operator visits both parties in person for the first transaction"
+
+# ---------- /cars, /cameras, /furniture coming-soon (FR-MKT-023) ----------
+coming_soon:
+  cars:
+    subbrand_chip: "Ezley Motors"
+    title_pattern: "Ezley Motors — Used Cars (coming soon) | Ezley"
+    headline:      "Ezley Motors — peer-to-peer used cars, agent-assisted."
+    wedge_thesis:  >-
+                   Used cars are the largest peer-to-peer category in the US.
+                   Buyers and sellers want escrow because a $40K wire to a stranger
+                   is what stops the deal today. Agents want a marketplace that
+                   doesn't ban them. Ezley Motors launches when the W1 farm-equipment
+                   wedge proves the trust model.
+    eta:           "Launching after W1 closed-beta proves the model. Target: late 2026."
+  cameras:
+    subbrand_chip: "Ezley Gear"
+    title_pattern: "Ezley Gear — Cameras, Instruments, Bicycles, Tools (coming soon) | Ezley"
+    headline:      "Ezley Gear — mid-AOV durable goods with the same trust model."
+    wedge_thesis:  >-
+                   Cameras, musical instruments, bicycles, and power tools are
+                   passionate-community goods that move on Facebook groups and
+                   Craigslist with trust gaps. Ezley Gear gives them the same
+                   escrow + identity infrastructure built for farm equipment.
+    eta:           "Target: 2027."
+  furniture:
+    subbrand_chip: "Ezley Home"
+    title_pattern: "Ezley Home — Furniture, Appliances, Sporting Goods, Collectibles (coming soon) | Ezley"
+    headline:      "Ezley Home — long-tail goods on the same trust layer."
+    wedge_thesis:  >-
+                   Furniture, appliances, sporting goods, and collectibles round
+                   out the horizontal thesis. Same escrow, same identity, same
+                   dispute model — local pickup at smaller AOV.
+    eta:           "Target: 2027–2028."
+
+# ---------- /how-it-works (US3) ----------
+how_it_works:
+  hero_headline:   "How a transaction works on Ezley."
+  buyer:
+    section_title: "If you're buying"
+    steps:
+      - "Browse listings — every Listing has a category, structured spec, photos, price, and seller."
+      - "Make an Offer — propose your price; seller accepts, counters, or declines."
+      - "Buyer funds Escrow — your money is Captured into the Ezley escrow account (operated via Stripe Connect), not the seller's account."
+      - "Handover — you and the seller arrange the physical handover, in person or with a coordinated carrier."
+      - "Buyer confirms receipt — you mark the Transaction as received."
+      - "Auto-release — when the window you chose at offer-accept passes, escrow releases to the seller. Confirming receipt yourself releases it sooner. If you spot a problem after release, you still have a window to open a dispute and freeze the funds."
+      - "Seller paid — funds settle to the seller's bank within about 9 days of release."
+  seller:
+    section_title: "If you're selling"
+    steps:
+      - "Create a Listing — title, description, photos, price, structured fields for your category."
+      - "Concierge reviewing — usually under 2 hours. (Tier-based auto-approve for trusted sellers; first listings and high-AOV listings get a quick concierge look.)"
+      - "Listing goes Live."
+      - "Buyer funds Escrow — when an Offer is accepted."
+      - "Handover — arrange with the buyer."
+      - "Buyer confirms receipt — or the agreed auto-release window passes."
+      - "Auto-release — escrow Releases to your Connect account."
+      - "Paid out — funds settle to your bank."
+  identity:
+    section_title: "Identity verification"
+    intro:         "Every seller and buyer has a verification tier visible on their profile."
+    tiers:
+      - name: "BASIC"
+        meaning: "Email verified. New accounts start here."
+      - name: "VERIFIED"
+        meaning: "Email + phone + government ID. Required to sell above per-category thresholds."
+      - name: "TRUSTED_SELLER"
+        meaning: "Email + phone + government ID + address + transaction history. Auto-approved listings, faster payout."
+  disputes:
+    section_title: "Disputes"
+    intro:         >-
+                   Disputes follow a defined process. If you and the other party
+                   can't resolve a problem directly, you can open a dispute on
+                   the transaction. A named Ezley operator handles each case,
+                   with documented adjudication steps and the right to escalate.
+
+# ---------- /pricing (US4) ----------
+pricing:
+  hero_headline:   "Free to list. Pay only when you sell."
+  intro:           >-
+                   One Ezley fee, bundled by payment path. No listing fee.
+                   No subscription. Pay only on completed transactions.
+  rate_card_inclusion: "Includes escrow protection, dispute resolution, payment processing, and concierge support — all included."
+  worked_example:
+    section_title: "What you net"
+    intro:         "On a $40,000 sale paid by wire:"
+    # The actual numbers are computed in Liquid from site.data.config —
+    # this copy block only frames them.
+  faq_link:        "What's included?"
+
+# ---------- /trust (depth) ----------
+trust:
+  hero_headline:   "Trust is the product."
+  intro:           >-
+                   Trust is what Ezley is built on. Escrow, identity
+                   verification, dispute resolution, and concierge are the
+                   foundations.
+  buyer_funds_held:
+    title:         "Your money stays in escrow"
+    body:          >-
+                   Your money is held in escrow until handover is confirmed and a
+                   review window passes. You can confirm receipt yourself, or the
+                   agreed window passes after handover and the funds release. And
+                   if something turns out wrong after release — wrong item, missing
+                   parts, damage you didn't catch at handover, never delivered —
+                   you still have a window to open a dispute. Filing a dispute
+                   freezes the funds while it's worked out.
+  wire_or_ach:
+    title:         "Above a certain price, card payment isn't offered"
+    body:          >-
+                   Above a certain price (we'll show it at checkout), card
+                   payment isn't offered. Wire and ACH are the path because
+                   they're both safer and cheaper for transactions this size.
+  # Note: any dispute-statistics or SLA-target callout is intentionally
+  # absent from /trust at M0 per the spec's tightened FR-MKT-055.
+  # F-MKT-003 (post-M9) is the spec that publishes measured statistics
+  # once we have real volume.
+
+# ---------- /agents (US5) ----------
+agents:
+  hero_headline:   "Agents are first-class on Ezley."
+  intro:           >-
+                   AI buying and selling agents — ChatGPT, Claude, Gemini,
+                   Perplexity, bespoke buyer agents — are first-class citizens
+                   of the marketplace, not edge cases.
+  posture:         >-
+                   Ezley does not block agent traffic except for fraud or
+                   abuse, and never solely for being agent traffic.
+  discovery:
+    title:         "Agent-discovery surface"
+    links:
+      - { label: "llms.txt", url: "/llms.txt" }
+      - { label: "mcp.json", url: "/mcp.json" }
+      - { label: "sitemap.xml", url: "/sitemap.xml" }
+      - { label: "robots.txt", url: "/robots.txt" }

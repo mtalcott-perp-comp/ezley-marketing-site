@@ -1,0 +1,14 @@
+---
+layout: null
+permalink: /robots.txt
+sitemap: false
+---
+# Ezley public marketing site — robots policy
+# All user-agents are allowed everywhere. Agents are first-class per
+# the product principle P-03 (agent-native, not agent-tolerant).
+
+User-agent: *
+Allow: /
+
+# Discovery surfaces
+Sitemap: https://ezley.com/sitemap.xml

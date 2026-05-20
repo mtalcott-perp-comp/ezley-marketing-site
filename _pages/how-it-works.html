@@ -1,0 +1,162 @@
+---
+layout: landing
+permalink: /how-it-works/
+title: "How it works"
+description: "How a transaction works on Ezley, end to end. The buyer flow, the seller flow, identity tiers, and the dispute process — explained plainly."
+---
+{% assign copy = site.data.copy['en-US'].how_it_works %}
+{% assign cfg = site.data.config %}
+
+{% comment %}
+  /how-it-works — User Story 3 (P1).
+
+  FR-MKT-030: buyer flow uses glossary terms only.
+  FR-MKT-031: seller flow uses glossary terms; concierge copy contract (D-018).
+  FR-MKT-032: NEVER "awaiting approval" — always "Concierge reviewing — usually under 2 hours".
+  FR-MKT-033: Auto-release window comes from cfg.payments.autoReleaseHoursDefault.
+  FR-MKT-034: tier names are BASIC / VERIFIED / TRUSTED_SELLER verbatim.
+  FR-MKT-035: dispute PROCESS only, no SLA / resolution-rate numbers at M0 (Q8).
+{% endcomment %}
+
+<!-- ========================================================================
+     HERO
+     ======================================================================== -->
+<section class="relative overflow-hidden isolate
+                bg-gradient-to-b from-surface to-surface-tint
+                py-20 sm:py-24">
+
+  <div aria-hidden="true" class="pointer-events-none absolute -top-40 -right-40 h-[600px] w-[600px] rounded-full bg-primary/10 blur-3xl"></div>
+
+  <div class="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+    <h1 class="font-display font-bold tracking-tight text-ink
+               text-4xl sm:text-5xl leading-[1.1]">
+      {{ copy.hero_headline }}
+    </h1>
+    <p class="mt-5 text-lg text-ink-muted max-w-prose-tight mx-auto leading-relaxed">
+      Two flows. One trust layer. Same protections whether you're buying a tractor or a couch.
+    </p>
+  </div>
+</section>
+
+<!-- ========================================================================
+     BUYER FLOW — FR-MKT-030
+     ======================================================================== -->
+<section class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-24" aria-labelledby="buyer-title">
+  <h2 id="buyer-title" class="font-display font-bold text-3xl sm:text-4xl text-ink mb-2">
+    {{ copy.buyer.section_title }}
+  </h2>
+  <p class="text-ink-muted mb-10 leading-relaxed">
+    Step by step, from browse to payout, in plain English.
+  </p>
+
+  <ol class="relative space-y-4 list-none p-0">
+    {% for step in copy.buyer.steps %}
+    <li class="flex gap-5 bg-surface rounded-xl border border-ink-border p-5 hover:border-primary transition-colors">
+      <div class="flex-none h-10 w-10 rounded-lg bg-primary/10 text-primary-ink
+                  flex items-center justify-center font-display font-bold text-lg">
+        {{ forloop.index }}
+      </div>
+      <p class="text-ink leading-relaxed pt-1">{{ step }}</p>
+    </li>
+    {% endfor %}
+  </ol>
+</section>
+
+<!-- ========================================================================
+     SELLER FLOW — FR-MKT-031, FR-MKT-032 (concierge copy contract)
+     ======================================================================== -->
+<section class="bg-surface-subtle border-y border-ink-border" aria-labelledby="seller-title">
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-24">
+    <h2 id="seller-title" class="font-display font-bold text-3xl sm:text-4xl text-ink mb-2">
+      {{ copy.seller.section_title }}
+    </h2>
+    <p class="text-ink-muted mb-10 leading-relaxed">
+      Most listings publish instantly. New sellers and high-value listings get a quick concierge look first &mdash; usually under two hours.
+    </p>
+
+    <ol class="relative space-y-4 list-none p-0">
+      {% for step in copy.seller.steps %}
+      <li class="flex gap-5 bg-surface rounded-xl border border-ink-border p-5 hover:border-primary transition-colors">
+        <div class="flex-none h-10 w-10 rounded-lg bg-primary/10 text-primary-ink
+                    flex items-center justify-center font-display font-bold text-lg">
+          {{ forloop.index }}
+        </div>
+        <p class="text-ink leading-relaxed pt-1">{{ step }}</p>
+      </li>
+      {% endfor %}
+    </ol>
+  </div>
+</section>
+
+<!-- ========================================================================
+     AUTO-RELEASE detail — FR-MKT-033 (config-sourced, never inline)
+     ======================================================================== -->
+<section class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-24 text-center" aria-labelledby="auto-release-title">
+  <h2 id="auto-release-title" class="font-display font-bold text-2xl sm:text-3xl text-ink mb-4">
+    Auto-release
+  </h2>
+  <p class="text-ink-muted leading-relaxed">
+    The buyer's chosen review window starts after handover is confirmed.
+    Default window is <strong class="text-ink">{{ cfg.payments.autoReleaseHoursDefault }} hours</strong> &mdash;
+    set per transaction at offer-accept time and immutable after that.
+    If the window passes with no dispute opened, escrow releases to the seller automatically.
+    Funds settle within ~9 days of buyer confirmation.
+  </p>
+</section>
+
+<!-- ========================================================================
+     IDENTITY VERIFICATION — FR-MKT-034 (glossary tier names verbatim)
+     ======================================================================== -->
+<section class="bg-surface-subtle border-y border-ink-border" aria-labelledby="identity-title">
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-24">
+    <h2 id="identity-title" class="font-display font-bold text-3xl sm:text-4xl text-ink mb-2">
+      {{ copy.identity.section_title }}
+    </h2>
+    <p class="text-ink-muted mb-10 leading-relaxed max-w-2xl">{{ copy.identity.intro }}</p>
+
+    <ul class="grid md:grid-cols-3 gap-5 list-none p-0">
+      {% for tier in copy.identity.tiers %}
+      <li class="bg-surface rounded-xl border border-ink-border p-6">
+        <h3 class="font-display font-semibold text-base tracking-wider text-primary-ink mb-3">
+          <code class="text-sm bg-primary/10 px-2 py-1 rounded">{{ tier.name }}</code>
+        </h3>
+        <p class="text-ink-muted leading-relaxed">{{ tier.meaning }}</p>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+</section>
+
+<!-- ========================================================================
+     DISPUTES — FR-MKT-035 (PROCESS only, no SLA / resolution-rate per Q8)
+     ======================================================================== -->
+<section class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-24" aria-labelledby="disputes-title">
+  <h2 id="disputes-title" class="font-display font-bold text-2xl sm:text-3xl text-ink mb-4">
+    {{ copy.disputes.section_title }}
+  </h2>
+  <p class="text-ink-muted leading-relaxed">{{ copy.disputes.intro }}</p>
+</section>
+
+<!-- ========================================================================
+     CTA strip
+     ======================================================================== -->
+<section class="bg-primary-ink text-white">
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 text-center">
+    <h2 class="font-display font-bold text-3xl sm:text-4xl">
+      Ready to start?
+    </h2>
+    <p class="mt-4 text-lg text-white/80 max-w-2xl mx-auto leading-relaxed">
+      Free to list. Pay only when you sell. One bundled Ezley fee.
+    </p>
+    <div class="mt-8 flex flex-wrap justify-center gap-3">
+      <a class="inline-flex items-center justify-center h-12 px-7 rounded-lg font-semibold bg-white text-primary-ink hover:bg-surface-tint transition-colors"
+         href="{{ site.cta.app_url }}/?utm_source={{ site.cta.utm_source }}&amp;utm_campaign=how-it-works&amp;utm_content=footer-cta">
+        Start selling
+      </a>
+      <a class="inline-flex items-center justify-center h-12 px-7 rounded-lg font-semibold border border-white/40 text-white hover:bg-white/10 transition-colors"
+         href="{{ '/pricing/' | relative_url }}">
+        See pricing
+      </a>
+    </div>
+  </div>
+</section>

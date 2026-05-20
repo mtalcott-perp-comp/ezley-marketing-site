@@ -1,0 +1,11 @@
+---
+layout: default
+---
+{%- comment -%}
+  Landing layout — used by the home page and by category front-doors.
+  It is intentionally a pass-through over `default`: the page owns its
+  own hero markup, so the layout adds nothing visual. Front-matter
+  `title:` and `description:` flow through to jekyll-seo-tag in <head>.
+{%- endcomment -%}
+
+{{ content }}

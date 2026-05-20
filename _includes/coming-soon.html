@@ -1,0 +1,58 @@
+{%- comment -%}
+  Coming-soon interstitial template — FR-MKT-023.
+
+  Usage from a page:
+    {% include coming-soon.html wedge="cars" %}
+
+  Reads from _data/copy/en-US.yml under coming_soon.<wedge>.
+  Email capture is OUT OF SCOPE here (deferred to F-MKT-002 per Q3).
+  Site chrome (header, footer) is unchanged from the rest of the site.
+{%- endcomment -%}
+
+{% assign w = site.data.copy['en-US'].coming_soon[include.wedge] %}
+
+<section class="relative overflow-hidden isolate
+                bg-gradient-to-b from-surface to-surface-tint
+                py-24 sm:py-32 lg:py-40">
+
+  <div aria-hidden="true" class="pointer-events-none absolute -top-40 -right-40 h-[600px] w-[600px] rounded-full bg-primary/10 blur-3xl"></div>
+  <div aria-hidden="true" class="pointer-events-none absolute -bottom-32 -left-40 h-[500px] w-[500px] rounded-full bg-primary/5 blur-3xl"></div>
+
+  <div class="relative max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+    <span class="subbrand-chip">{{ w.subbrand_chip }}</span>
+
+    <p class="mt-2 mb-3 text-sm font-semibold uppercase tracking-widest text-primary">
+      Coming soon
+    </p>
+
+    <h1 class="font-display font-bold tracking-tight text-ink
+               text-4xl sm:text-5xl leading-[1.1] mb-6">
+      {{ w.headline }}
+    </h1>
+
+    <p class="text-lg sm:text-xl text-ink-muted leading-relaxed mb-8">
+      {{ w.wedge_thesis }}
+    </p>
+
+    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-surface border border-ink-border text-sm text-ink-muted">
+      <svg aria-hidden="true" class="h-4 w-4 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+      </svg>
+      <span><strong class="text-ink">{{ w.eta }}</strong></span>
+    </div>
+  </div>
+</section>
+
+<!-- The W1 farm-equipment wedge is live now — point visitors there. -->
+<section class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-16 text-center">
+  <h2 class="font-display font-semibold text-xl text-ink mb-3">
+    What's live today?
+  </h2>
+  <p class="text-ink-muted leading-relaxed mb-6">
+    Our farm-equipment wedge (Ezley Equipment) is the first live category.
+    Same trust layer, same escrow, same agent-native protocol stack &mdash; just narrower scope.
+  </p>
+  <a href="{{ '/tractors/' | relative_url }}" class="btn-secondary">
+    See Ezley Equipment
+  </a>
+</section>

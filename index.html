@@ -1,0 +1,178 @@
+---
+layout: landing
+permalink: /
+title: "Ezley"
+description: "The open marketplace for high-trust, high-value, peer-to-peer commerce. Escrow-held funds, identity-verified sellers. Free to list."
+---
+{% assign copy = site.data.copy['en-US'].home %}
+{% assign cfg = site.data.config %}
+
+{% comment %}
+  Home page — User Story 1 (P1) + supporting FRs.
+  FR-MKT-010    : Hero vision line verbatim.
+  FR-MKT-010a   : Single trust anchor = escrow (Q7 resolution).
+  FR-MKT-011    : Exactly one primary CTA + at most one secondary.
+  FR-MKT-012..016: Hybrid-voice competitor contrast rows.
+  FR-MKT-017    : How-it-works preview, glossary terms only.
+  FR-MKT-018    : Pricing teaser.
+  FR-MKT-019    : Ezley-owned trust signals, no third-party names.
+{% endcomment %}
+
+<!-- ========================================================================
+     HERO — FR-MKT-010, FR-MKT-010a, FR-MKT-011
+     CSS-only designed treatment (no fake photographic authenticity per plan.md
+     hero-photography option 3). Soft mesh gradient + blurred accent shapes.
+     ======================================================================== -->
+<section class="relative overflow-hidden isolate
+                bg-gradient-to-b from-surface to-surface-tint
+                py-20 sm:py-28 lg:py-32">
+
+  <!-- Decorative accent blurs — purely aesthetic, hidden from screen readers. -->
+  <div aria-hidden="true" class="pointer-events-none absolute -top-40 -right-40 h-[600px] w-[600px] rounded-full bg-primary/10 blur-3xl"></div>
+  <div aria-hidden="true" class="pointer-events-none absolute -bottom-32 -left-40 h-[500px] w-[500px] rounded-full bg-primary/5 blur-3xl"></div>
+
+  <!-- Subtle dot-grid texture, masked to fade out below. -->
+  <div aria-hidden="true"
+       class="pointer-events-none absolute inset-0 opacity-40"
+       style="background-image: radial-gradient(circle, rgba(30,136,229,0.18) 1px, transparent 1px); background-size: 28px 28px; mask-image: linear-gradient(180deg, #000 0%, transparent 75%); -webkit-mask-image: linear-gradient(180deg, #000 0%, transparent 75%);"></div>
+
+  <div class="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+    <h1 class="font-display font-bold tracking-tight text-ink
+               text-[2.25rem] leading-[1.1] sm:text-5xl lg:text-6xl">
+      {{ copy.hero.headline_vision }}
+    </h1>
+
+    <p class="mt-6 text-lg sm:text-xl text-ink-muted max-w-prose-tight mx-auto leading-relaxed">
+      {{ copy.hero.headline_trust }}
+    </p>
+
+    <div class="mt-10 flex flex-wrap justify-center gap-3">
+      <a class="btn-primary"
+         href="{{ site.cta.app_url }}/?utm_source={{ site.cta.utm_source }}&amp;utm_campaign=home&amp;utm_content=hero-primary-cta"
+         aria-label="{{ copy.hero.cta_primary }} on app.ezley.com">
+        {{ copy.hero.cta_primary }}
+      </a>
+      <a class="btn-secondary"
+         href="{{ site.cta.app_url }}/?utm_source={{ site.cta.utm_source }}&amp;utm_campaign=home&amp;utm_content=hero-secondary-cta"
+         aria-label="{{ copy.hero.cta_secondary }} on app.ezley.com">
+        {{ copy.hero.cta_secondary }}
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ========================================================================
+     WHY EZLEY — FR-MKT-012..016 (hybrid competitor voice)
+     ======================================================================== -->
+<section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-24" aria-labelledby="why-ezley-title">
+  <div class="max-w-2xl mb-12">
+    <h2 id="why-ezley-title" class="font-display font-bold text-3xl sm:text-4xl text-ink">
+      {{ copy.why_ezley.section_title }}
+    </h2>
+    <p class="mt-3 text-ink-muted leading-relaxed">
+      How Ezley contrasts with the marketplaces you already use.
+    </p>
+  </div>
+
+  <ul class="grid sm:grid-cols-2 gap-5 list-none p-0">
+    {% for row in copy.why_ezley.rows %}
+    <li class="group bg-surface rounded-xl border border-ink-border p-6
+               hover:border-primary hover:shadow-lg hover:-translate-y-0.5
+               transition-all duration-200">
+      <h3 class="font-display font-semibold text-xl text-ink mb-3">
+        {{ row.name }}
+      </h3>
+      <p class="text-ink-muted leading-relaxed mb-5">
+        {{ row.differentiator }}
+      </p>
+      <div class="bg-primary/5 border-l-4 border-primary px-4 py-3 rounded-r-lg">
+        <p class="text-sm text-ink leading-relaxed">
+          <span class="font-semibold text-primary-ink">On Ezley:</span>
+          {{ row.anchor }}
+        </p>
+      </div>
+    </li>
+    {% endfor %}
+  </ul>
+</section>
+
+<!-- ========================================================================
+     TRUST SIGNALS — FR-MKT-019 (Ezley-owned, no third-party names)
+     ======================================================================== -->
+<section class="bg-surface-subtle border-y border-ink-border" aria-labelledby="trust-signals-title">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-24">
+    <h2 id="trust-signals-title" class="font-display font-bold text-3xl sm:text-4xl text-ink mb-12 text-center max-w-3xl mx-auto">
+      What you get on Ezley
+    </h2>
+
+    <ul class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 list-none p-0">
+      {% for signal in copy.trust_signals %}
+      <li class="bg-surface rounded-xl border border-ink-border p-5
+                 hover:border-primary transition-colors duration-200">
+        <div class="h-10 w-10 rounded-lg bg-primary/10 text-primary
+                    flex items-center justify-center mb-4">
+          <svg aria-hidden="true" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+          </svg>
+        </div>
+        <p class="text-ink leading-relaxed">{{ signal }}</p>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+</section>
+
+<!-- ========================================================================
+     HOW IT WORKS PREVIEW — FR-MKT-017 (glossary terms only)
+     ======================================================================== -->
+<section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-24" aria-labelledby="how-it-works-title">
+  <h2 id="how-it-works-title" class="font-display font-bold text-3xl sm:text-4xl text-ink mb-3">
+    {{ copy.how_it_works_preview.section_title }}
+  </h2>
+  <p class="text-ink-muted mb-12 max-w-2xl leading-relaxed">
+    Every transaction follows the same flow &mdash; the same steps whether you're buying a tractor or a couch.
+  </p>
+
+  <div class="grid md:grid-cols-2 gap-6">
+    <div class="bg-surface rounded-xl border border-ink-border p-7">
+      <h3 class="font-display font-semibold text-xl text-ink mb-3">If you're buying</h3>
+      <p class="text-ink-muted leading-relaxed">
+        {{ copy.how_it_works_preview.buyer_flow }}
+      </p>
+    </div>
+    <div class="bg-surface rounded-xl border border-ink-border p-7">
+      <h3 class="font-display font-semibold text-xl text-ink mb-3">If you're selling</h3>
+      <p class="text-ink-muted leading-relaxed">
+        {{ copy.how_it_works_preview.seller_flow }}
+      </p>
+    </div>
+  </div>
+
+  <div class="mt-8">
+    <a href="{{ '/how-it-works/' | relative_url }}" class="inline-flex items-center gap-1 text-primary font-semibold hover:text-primary-dark transition-colors">
+      Full walkthrough
+      <svg aria-hidden="true" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+      </svg>
+    </a>
+  </div>
+</section>
+
+<!-- ========================================================================
+     PRICING TEASER — FR-MKT-018
+     ======================================================================== -->
+<section class="bg-primary-ink text-white" aria-labelledby="pricing-teaser-title">
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-24 text-center">
+    <h2 id="pricing-teaser-title" class="font-display font-bold text-3xl sm:text-5xl">
+      {{ copy.pricing_teaser }}
+    </h2>
+    <p class="mt-5 text-lg text-white/80 max-w-2xl mx-auto leading-relaxed">
+      One Ezley fee, bundled by payment path. Wire <strong class="text-white">{{ cfg.pricing.wireTakeRatePct }}%</strong>. ACH <strong class="text-white">{{ cfg.pricing.achTakeRatePct }}%</strong>. Card <strong class="text-white">{{ cfg.pricing.cardTakeRatePct }}%</strong>. No listing fee. No subscription.
+    </p>
+    <div class="mt-10">
+      <a href="{{ '/pricing/' | relative_url }}" class="inline-flex items-center justify-center h-12 px-7 rounded-lg font-semibold bg-white text-primary-ink hover:bg-surface-tint transition-colors">
+        See the rate cards
+      </a>
+    </div>
+  </div>
+</section>

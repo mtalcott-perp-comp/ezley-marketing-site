@@ -1,0 +1,170 @@
+---
+layout: landing
+permalink: /agents/
+title: "For agents — MCP, ACP, UCP, AP2"
+description: "Ezley is agent-native by design. AI buying and selling agents are first-class citizens. Find our llms.txt, mcp.json, and agent-protocol endpoints here."
+---
+{% assign copy = site.data.copy['en-US'].agents %}
+
+{% comment %}
+  /agents — User Story 5 (P2, B-AGENT discovery surface).
+
+  FR-MKT-060: explain agent-native posture; point at marketplace API's
+              MCP / ACP / UCP / AP2 endpoints. Endpoints themselves live
+              in the API repo — this page only POINTS at them.
+              At M0 the endpoints are not yet shipped; copy says
+              "documentation coming soon (ETA M3)" per plan.md.
+  FR-MKT-061: state Ezley does not block agent traffic except for
+              fraud/abuse, and never solely for being agent traffic.
+  FR-MKT-062: link to /llms.txt, /mcp.json, /sitemap.xml, /robots.txt.
+{% endcomment %}
+
+<!-- ========================================================================
+     HERO
+     ======================================================================== -->
+<section class="relative overflow-hidden isolate
+                bg-gradient-to-b from-surface to-surface-tint
+                py-20 sm:py-24">
+
+  <div aria-hidden="true" class="pointer-events-none absolute -top-40 -right-40 h-[600px] w-[600px] rounded-full bg-primary/10 blur-3xl"></div>
+
+  <div class="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+    <span class="subbrand-chip">For AI agents</span>
+
+    <h1 class="font-display font-bold tracking-tight text-ink
+               text-4xl sm:text-5xl lg:text-6xl leading-[1.1]">
+      {{ copy.hero_headline }}
+    </h1>
+
+    <p class="mt-6 text-lg sm:text-xl text-ink-muted max-w-prose-tight mx-auto leading-relaxed">
+      {{ copy.intro }}
+    </p>
+  </div>
+</section>
+
+<!-- ========================================================================
+     POSTURE — FR-MKT-061
+     ======================================================================== -->
+<section class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-24">
+  <div class="rounded-2xl border-2 border-primary bg-primary/5 p-8 text-center">
+    <svg aria-hidden="true" class="h-10 w-10 mx-auto mb-4 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+    </svg>
+    <p class="text-lg sm:text-xl text-ink font-medium leading-relaxed">
+      {{ copy.posture }}
+    </p>
+  </div>
+</section>
+
+<!-- ========================================================================
+     PROTOCOLS — what we speak
+     ======================================================================== -->
+<section class="bg-surface-subtle border-y border-ink-border" aria-labelledby="protocols-title">
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-24">
+    <h2 id="protocols-title" class="font-display font-bold text-3xl sm:text-4xl text-ink mb-3">
+      Protocols
+    </h2>
+    <p class="text-ink-muted mb-10 leading-relaxed max-w-2xl">
+      Ezley implements the open commerce protocols agents need to discover, evaluate, negotiate, and transact on a marketplace.
+    </p>
+
+    <ul class="grid md:grid-cols-2 gap-5 list-none p-0">
+
+      <li class="bg-surface rounded-xl border border-ink-border p-6">
+        <div class="flex items-baseline justify-between mb-2">
+          <h3 class="font-display font-semibold text-xl text-ink">MCP</h3>
+          <code class="text-xs text-ink-soft">Model Context Protocol</code>
+        </div>
+        <p class="text-ink-muted leading-relaxed mb-4">
+          Server-side discovery + actions. Listings, offers, and transactions exposed as MCP tools.
+        </p>
+        <p class="text-sm text-ink-muted italic">Endpoint documentation: <strong class="text-ink">coming soon (ETA M3)</strong></p>
+      </li>
+
+      <li class="bg-surface rounded-xl border border-ink-border p-6">
+        <div class="flex items-baseline justify-between mb-2">
+          <h3 class="font-display font-semibold text-xl text-ink">ACP</h3>
+          <code class="text-xs text-ink-soft">Agentic Commerce Protocol</code>
+        </div>
+        <p class="text-ink-muted leading-relaxed mb-4">
+          Payment-on-behalf-of-user via Stripe + OpenAI. Agents pay through Ezley's escrow flow with delegated authorization.
+        </p>
+        <p class="text-sm text-ink-muted italic">Endpoint documentation: <strong class="text-ink">coming soon (ETA M9)</strong></p>
+      </li>
+
+      <li class="bg-surface rounded-xl border border-ink-border p-6">
+        <div class="flex items-baseline justify-between mb-2">
+          <h3 class="font-display font-semibold text-xl text-ink">UCP</h3>
+          <code class="text-xs text-ink-soft">Universal Cart Protocol</code>
+        </div>
+        <p class="text-ink-muted leading-relaxed mb-4">
+          Carts assembled and committed across categories. Agents build multi-item carts that span wedges.
+        </p>
+        <p class="text-sm text-ink-muted italic">Endpoint documentation: <strong class="text-ink">coming soon (ETA M12)</strong></p>
+      </li>
+
+      <li class="bg-surface rounded-xl border border-ink-border p-6">
+        <div class="flex items-baseline justify-between mb-2">
+          <h3 class="font-display font-semibold text-xl text-ink">AP2</h3>
+          <code class="text-xs text-ink-soft">Agent Payments Protocol</code>
+        </div>
+        <p class="text-ink-muted leading-relaxed mb-4">
+          Second payment rail for agent-initiated transactions. Complements ACP.
+        </p>
+        <p class="text-sm text-ink-muted italic">Endpoint documentation: <strong class="text-ink">coming soon (ETA M15)</strong></p>
+      </li>
+
+    </ul>
+  </div>
+</section>
+
+<!-- ========================================================================
+     DISCOVERY SURFACE — FR-MKT-062
+     ======================================================================== -->
+<section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-24" aria-labelledby="discovery-title">
+  <h2 id="discovery-title" class="font-display font-bold text-3xl sm:text-4xl text-ink mb-3">
+    {{ copy.discovery.title }}
+  </h2>
+  <p class="text-ink-muted mb-10 leading-relaxed max-w-2xl">
+    Standard agent-discovery files served at the root. Crawl freely &mdash; no Cloudflare Turnstile, no hCaptcha, no JS-only gates.
+  </p>
+
+  <ul class="grid sm:grid-cols-2 gap-4 list-none p-0">
+    {% for link in copy.discovery.links %}
+    <li>
+      <a href="{{ link.url | relative_url }}"
+         class="block bg-surface rounded-xl border border-ink-border p-5 hover:border-primary hover:shadow-md transition-all group">
+        <div class="flex items-center gap-3">
+          <div class="h-10 w-10 rounded-lg bg-primary/10 text-primary
+                      flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-colors">
+            <svg aria-hidden="true" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+            </svg>
+          </div>
+          <code class="font-mono text-base text-ink font-semibold">{{ link.label }}</code>
+        </div>
+      </a>
+    </li>
+    {% endfor %}
+  </ul>
+</section>
+
+<!-- ========================================================================
+     CTA strip
+     ======================================================================== -->
+<section class="bg-primary-ink text-white">
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 text-center">
+    <h2 class="font-display font-bold text-3xl sm:text-4xl">
+      Building an agent that buys or sells?
+    </h2>
+    <p class="mt-4 text-lg text-white/80 max-w-2xl mx-auto leading-relaxed">
+      Get in touch &mdash; we'd rather work with you early than catch up later.
+    </p>
+    <div class="mt-8">
+      <a class="inline-flex items-center justify-center h-12 px-7 rounded-lg font-semibold bg-white text-primary-ink hover:bg-surface-tint transition-colors"
+         href="mailto:agents@ezley.com">
+        agents@ezley.com
+      </a>
+    </div>
+  </div>
+</section>

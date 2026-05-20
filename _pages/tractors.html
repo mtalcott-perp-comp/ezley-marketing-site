@@ -1,0 +1,105 @@
+---
+layout: landing
+permalink: /tractors/
+title: "Ezley Equipment — Tractors, Combines, Implements | Ezley"
+description: "Sell your tractor, combine, or implement to a verified buyer. Wire payment supported. No shipping required. Concierge support in your county."
+---
+{% assign copy = site.data.copy['en-US'].tractors %}
+
+{% comment %}
+  /tractors — User Story 2 (P1, S-FARMER acquisition).
+
+  FR-MKT-020: header wordmark stays "Ezley" (handled by _includes/header.html).
+  FR-MKT-021: hero tailored to S-FARMER / S-DEALER / B-FARMER.
+  FR-MKT-024: hero references wire payment, no shipping, concierge.
+  FR-MKT-025: CTA carries utm_campaign=tractors.
+  FR-MKT-026: sub-brand "Ezley Equipment" in <title>, in chip above H1, in body.
+  FR-MKT-019 / US2 scenario 2 (Q6 resolution): trust signals are Ezley-owned,
+  no third-party brand names (Machinery Pete, RFD-TV, etc.).
+{% endcomment %}
+
+<!-- ========================================================================
+     HERO — sub-brand chip + category-tailored S-FARMER copy
+     ======================================================================== -->
+<section class="relative overflow-hidden isolate
+                bg-gradient-to-b from-surface to-surface-tint
+                py-20 sm:py-28">
+
+  <div aria-hidden="true" class="pointer-events-none absolute -top-40 -right-40 h-[600px] w-[600px] rounded-full bg-primary/10 blur-3xl"></div>
+  <div aria-hidden="true" class="pointer-events-none absolute -bottom-32 -left-40 h-[500px] w-[500px] rounded-full bg-primary/5 blur-3xl"></div>
+
+  <div class="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+    <!-- Sub-brand chip — FR-MKT-026(b) -->
+    <span class="subbrand-chip">{{ copy.subbrand_chip }}</span>
+
+    <h1 class="font-display font-bold tracking-tight text-ink
+               text-[2.25rem] leading-[1.1] sm:text-5xl lg:text-6xl">
+      {{ copy.hero.headline }}
+    </h1>
+
+    <p class="mt-6 text-lg sm:text-xl text-ink-muted max-w-prose-tight mx-auto leading-relaxed">
+      {{ copy.hero.sub }}
+    </p>
+
+    <div class="mt-10 flex flex-wrap justify-center gap-3">
+      <a class="btn-primary"
+         href="{{ site.cta.app_url }}/?utm_source={{ site.cta.utm_source }}&amp;utm_campaign=tractors&amp;utm_content=hero-primary-cta">
+        {{ copy.hero.cta_primary }}
+      </a>
+      <a class="btn-secondary"
+         href="{{ site.cta.app_url }}/?utm_source={{ site.cta.utm_source }}&amp;utm_campaign=tractors&amp;utm_content=hero-browse-cta">
+        Browse equipment listings
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ========================================================================
+     BODY INTRO — sub-brand naming in body copy (FR-MKT-026(c))
+     ======================================================================== -->
+<section class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 text-center">
+  <p class="text-xl text-ink-muted leading-relaxed">
+    {{ copy.body_intro }}
+  </p>
+</section>
+
+<!-- ========================================================================
+     TRUST SIGNALS — Ezley-owned ONLY (FR-MKT-019 / Q6)
+     ======================================================================== -->
+<section class="bg-surface-subtle border-y border-ink-border">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-24">
+    <h2 class="font-display font-bold text-3xl sm:text-4xl text-ink mb-12 text-center max-w-3xl mx-auto">
+      What S-FARMER gets on Ezley
+    </h2>
+
+    <ul class="grid sm:grid-cols-2 gap-4 list-none p-0 max-w-4xl mx-auto">
+      {% for signal in copy.trust_signals %}
+      <li class="bg-surface rounded-xl border border-ink-border p-6
+                 hover:border-primary transition-colors">
+        <div class="h-10 w-10 rounded-lg bg-primary/10 text-primary
+                    flex items-center justify-center mb-4">
+          <svg aria-hidden="true" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+          </svg>
+        </div>
+        <p class="text-ink leading-relaxed">{{ signal }}</p>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+</section>
+
+<!-- ========================================================================
+     CALL OUT — link to depth pages
+     ======================================================================== -->
+<section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-24 text-center">
+  <h2 class="font-display font-bold text-2xl sm:text-3xl text-ink mb-4">
+    How does a transaction work, end to end?
+  </h2>
+  <p class="text-ink-muted leading-relaxed mb-8">
+    Walk the buyer flow and the seller flow &mdash; escrow, handover, auto-release, payout &mdash; all explained step by step.
+  </p>
+  <a href="{{ '/how-it-works/' | relative_url }}" class="btn-secondary">
+    See how it works
+  </a>
+</section>

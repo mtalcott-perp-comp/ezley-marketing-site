@@ -1,0 +1,80 @@
+# Deploy the Jekyll marketing site to GitHub Pages.
+#
+# Workflow design notes:
+#   • Runs on push to main + on manual dispatch (workflow_dispatch) + daily cron
+#     at 06:00 UTC so the cache stays fresh even when no source changes (per
+#     plan.md "Build process": NFR-MKT-008 24h max staleness on /api/config/public).
+#   • The 24h cron is no-op in M0 because we ship a static _data/config.yml
+#     snapshot. When fetch-config.sh lands in tasks.md, the cron does real work.
+#   • Uses ruby/setup-ruby with bundler-cache for fast gem install (~10s cold,
+#     ~3s warm).
+#   • configure-pages + upload-pages-artifact + deploy-pages is the modern
+#     Actions-based deploy (replaces the legacy "Deploy from a branch" Pages
+#     setting). Pages source MUST be set to "GitHub Actions" in repo settings
+#     for this to work — gh repo edit handles that step at first push.
+#   • `JEKYLL_ENV=production` switches off draft mode and turns on a few
+#     production-only behaviors (e.g., jekyll-seo-tag emits canonical URLs
+#     with site.url).
+
+name: Deploy Jekyll site to Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+  schedule:
+    - cron: "0 6 * * *"
+
+# Required by actions/deploy-pages to push to the gh-pages environment.
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Two scheduled runs colliding would clobber each other.
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.2"
+          bundler-cache: true
+
+      - name: Configure Pages
+        id: pages
+        uses: actions/configure-pages@v5
+
+      - name: Build with Jekyll
+        env:
+          JEKYLL_ENV: production
+        # base_path is automatically empty when a custom domain (CNAME) is set,
+        # so this single command works both for the project-page URL
+        # (mtalcott-perp-comp.github.io/ezley-marketing-site/) and for the
+        # future ezley.com custom domain — no rebuild required.
+        run: bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}"
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./_site
+
+  deploy:
+    needs: build
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

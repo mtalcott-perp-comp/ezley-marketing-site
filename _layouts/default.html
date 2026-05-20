@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="{{ site.locale | default: 'en-US' }}">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  {% seo %}
+
+  <!-- Fonts: Inter for body, Sora for display headings. preconnect saves DNS+TLS time. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@600;700;800&display=swap"
+  />
+
+  <!--
+    Tailwind via Play CDN at M0 — zero build setup, ships in seconds.
+    Documented migration path (tasks.md): switch to Tailwind Standalone
+    CLI when the GitHub Actions deploy workflow lands, for ~10–20KB
+    purged CSS instead of the ~3MB unminified runtime engine.
+  -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            // Mirror marketplace UI's clean-primary theme (NFR-MKT-013)
+            primary: {
+              DEFAULT: '#1E88E5',
+              dark:    '#1976D2',
+              light:   '#42A5F5',
+              ink:     '#0D47A1',
+            },
+            ink: {
+              DEFAULT: '#111111',
+              muted:   '#666666',
+              soft:    '#9CA3AF',
+              border:  '#E5E5E5',
+            },
+            surface: {
+              DEFAULT: '#FFFFFF',
+              subtle:  '#FAFAFA',
+              tint:    '#F4F8FC',
+            },
+            accent: {
+              danger:  '#E53935',  // secondary in marketplace clean-primary
+              warning: '#ED6C02',
+              success: '#2E7D32',
+            },
+          },
+          fontFamily: {
+            sans:    ['Inter', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+            display: ['Sora', 'Inter', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+          },
+          borderRadius: {
+            DEFAULT: '8px',
+          },
+          maxWidth: {
+            'prose-tight': '40rem',
+          },
+        },
+      },
+    };
+  </script>
+
+  <style type="text/tailwindcss">
+    @layer base {
+      html { -webkit-text-size-adjust: 100%; }
+      body { @apply font-sans text-ink antialiased bg-surface; }
+      h1, h2, h3, h4, h5, h6 { @apply font-display tracking-tight; }
+    }
+    @layer components {
+      .btn {
+        @apply inline-flex items-center justify-center gap-2 h-12 px-7 rounded-lg font-semibold text-base
+               shadow-sm transition-all duration-150
+               focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2;
+      }
+      .btn-primary {
+        @apply btn bg-primary text-white hover:bg-primary-dark hover:shadow-lg hover:-translate-y-0.5;
+      }
+      .btn-secondary {
+        @apply btn bg-white text-ink border border-ink-border hover:border-primary hover:text-primary;
+      }
+      .subbrand-chip {
+        @apply inline-flex items-center px-3 py-1 mb-4
+               text-xs font-semibold tracking-wide uppercase
+               text-primary-ink bg-primary/10 rounded-full;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-50 focus:px-4 focus:py-2 focus:bg-primary focus:text-white focus:rounded-lg">
+    Skip to content
+  </a>
+
+  {% include header.html %}
+
+  <main id="main">
+    {{ content }}
+  </main>
+
+  {% include footer.html %}
+
+</body>
+</html>

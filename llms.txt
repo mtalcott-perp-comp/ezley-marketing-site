@@ -1,0 +1,47 @@
+---
+layout: null
+permalink: /llms.txt
+sitemap: false
+---
+# Ezley
+
+> Ezley is the open, agent-native marketplace for high-trust, high-value, peer-to-peer commerce. Listings are polymorphic with category-specific structured specs. Trust services (escrow, identity verification, dispute resolution, concierge support) are paid; listings are free. AI agents are first-class citizens on both buyer and seller sides.
+
+This site is the public brand surface at [ezley.com](https://ezley.com). The marketplace application (browse, listing detail, auth, checkout, dashboards) lives at [app.ezley.com](https://app.ezley.com). The HTTP / agent-protocol API lives at [api.ezley.com](https://api.ezley.com).
+
+## What Ezley is
+
+- [Ezley.com](https://ezley.com): Brand surface, trust pitch, competitor contrast.
+- [How it works](https://ezley.com/how-it-works/): The buyer flow and seller flow end-to-end, glossary-strict.
+- [Pricing](https://ezley.com/pricing/): Bundled fee per payment path (Wire / ACH / Card). Free to list.
+- [Trust & Safety](https://ezley.com/trust/): Identity tiers, escrow flow, dispute process.
+- [For agents](https://ezley.com/agents/): Agent-native posture, protocol implementation status, discovery surface.
+
+## Live category front-doors
+
+- [Ezley Equipment (W1, live)](https://ezley.com/tractors/): Tractors, combines, implements, attachments.
+- [Ezley Motors (W2, coming soon)](https://ezley.com/cars/): Used cars, peer-to-peer, agent-assisted.
+- [Ezley Gear (W3, coming soon)](https://ezley.com/cameras/): Cameras, instruments, bicycles, power tools.
+- [Ezley Home (W4, coming soon)](https://ezley.com/furniture/): Furniture, appliances, sporting goods, collectibles.
+
+## Agent endpoints (point to api.ezley.com)
+
+- MCP: documentation coming soon (ETA M3). Will serve from `https://api.ezley.com/mcp`.
+- ACP: documentation coming soon (ETA M9). Will serve from `https://api.ezley.com/acp`.
+- UCP: documentation coming soon (ETA M12). Will serve from `https://api.ezley.com/ucp`.
+- AP2: documentation coming soon (ETA M15). Will serve from `https://api.ezley.com/ap2`.
+
+## Marketplace API
+
+- [Public config](https://api.ezley.com/api/config/public): Read-only configuration (pricing rates, payment thresholds, listing policy). Powers the rates shown on /pricing.
+- [Public listings catalog](https://api.ezley.com): Available at the marketplace app and via the agent endpoints above. The marketing site itself does not list or browse.
+
+## Optional
+
+- [Sitemap](https://ezley.com/sitemap.xml): Machine-readable site index.
+- [robots.txt](https://ezley.com/robots.txt): Crawl policy. All user-agents are allowed.
+- [mcp.json](https://ezley.com/mcp.json): MCP server manifest (placeholder until the M3 endpoint ships).
+
+## Get in touch
+
+If you are building an agent that buys or sells on Ezley, reach out at `agents@ezley.com`. We would rather work with you early than catch up later.

@@ -1,0 +1,26 @@
+# Marketing-site config snapshot — last-known-good values from
+# https://api.ezley.com/api/config/public.
+#
+# DO NOT hand-edit during normal operation. This file is overwritten by
+# scripts/fetch-config.sh in the GitHub Actions workflow. Values are read
+# from Liquid as {{ site.data.config.<key> }}.
+#
+# Snapshot date: 2026-05-19 (initial scaffold; not yet fetched from a live API)
+# Source: ezley-docs/08-glossary.md §6 defaults
+
+pricing:
+  cardTakeRatePct: 5.5
+  achTakeRatePct: 3.5
+  wireTakeRatePct: 3.0
+
+payments:
+  autoReleaseHoursDefault: 72
+  wireOnlyMinAmount: 25000
+  cardMaxAmount: 5000
+  depositPercentDefault: 10
+
+listings:
+  highAOVReviewThreshold: 25000
+  newCategoryReviewWindowDays: 60
+  minPhotos: 8
+  maxPhotos: 30

@@ -1,0 +1,81 @@
+# Jekyll site configuration — Ezley public marketing site
+# Path-C stack (2026-05-19): own minimal layouts, Tailwind via CDN.
+# No remote theme. See plan.md for rationale.
+
+# ---------- Site metadata ----------
+title:            "Ezley"
+title_separator:  "—"
+subtitle:         ""
+name:             "Ezley"
+description:      >-
+                  Ezley is the open marketplace for high-trust, high-value,
+                  peer-to-peer commerce. Sell or buy serious used goods with
+                  escrow-held funds and identity-verified counterparties.
+url:              "https://ezley.com"
+baseurl:          ""
+repository:       "" # set after `git init && gh repo create` per quickstart.md
+locale:           "en-US"
+
+# ---------- SEO ----------
+twitter:
+  username:       ""
+social:
+  type:           "Organization"
+  name:           "Ezley"
+  links:          []
+
+# ---------- Build behavior ----------
+markdown:         kramdown
+highlighter:      rouge
+permalink:        /:title/
+timezone:         America/Chicago
+
+include:
+  - _pages
+  - llms.txt
+  - mcp.json
+  - robots.txt
+
+exclude:
+  - .specify
+  - PRDs
+  - .github
+  - Gemfile
+  - Gemfile.lock
+  - scripts
+  - README.md
+  - vendor
+  - node_modules
+
+# ---------- Plugins (minimal — no theme deps) ----------
+plugins:
+  - jekyll-sitemap
+  - jekyll-seo-tag
+
+# ---------- Defaults — front-matter sugar ----------
+defaults:
+  - scope:
+      path: ""
+      type: pages
+    values:
+      layout: landing
+
+# ---------- Footer links ----------
+footer:
+  links:
+    - { label: "How it works", url: "/how-it-works/" }
+    - { label: "Pricing",      url: "/pricing/" }
+    - { label: "Trust & Safety", url: "/trust/" }
+    - { label: "For agents",   url: "/agents/" }
+
+# ---------- Category front-doors ----------
+category_front_doors:
+  - { label: "Ezley Equipment", url: "/tractors/" }
+  - { label: "Ezley Motors",    url: "/cars/" }
+  - { label: "Ezley Gear",      url: "/cameras/" }
+  - { label: "Ezley Home",      url: "/furniture/" }
+
+# ---------- Site-wide CTA defaults ----------
+cta:
+  app_url: "https://app.ezley.com"
+  utm_source: "marketing-site"

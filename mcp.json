@@ -1,0 +1,56 @@
+---
+layout: null
+permalink: /mcp.json
+sitemap: false
+---
+{
+  "$schema": "https://modelcontextprotocol.io/schema/mcp-manifest.json",
+  "name": "ezley",
+  "displayName": "Ezley",
+  "description": "The open, agent-native marketplace for high-trust, high-value, peer-to-peer commerce. Listings are polymorphic with category-specific structured specs. Trust services (escrow, identity verification, dispute resolution) are first-class.",
+  "publisher": {
+    "name": "Ezley",
+    "url": "https://ezley.com"
+  },
+  "homepage": "https://ezley.com",
+  "documentation": "https://ezley.com/agents/",
+  "status": "preview",
+  "statusNote": "MCP server endpoint targeted for M3 (Aug 2026). This manifest is published now so agents can discover Ezley and plan integration. The endpoint URL below will become live at M3.",
+  "transports": [
+    {
+      "type": "streamable-http",
+      "url": "https://api.ezley.com/mcp",
+      "status": "coming-soon",
+      "eta": "M3"
+    }
+  ],
+  "capabilities": {
+    "tools": "planned",
+    "resources": "planned",
+    "prompts": "planned"
+  },
+  "relatedProtocols": [
+    {
+      "name": "ACP",
+      "displayName": "Agentic Commerce Protocol",
+      "url": "https://api.ezley.com/acp",
+      "status": "coming-soon",
+      "eta": "M9"
+    },
+    {
+      "name": "UCP",
+      "displayName": "Universal Cart Protocol",
+      "url": "https://api.ezley.com/ucp",
+      "status": "coming-soon",
+      "eta": "M12"
+    },
+    {
+      "name": "AP2",
+      "displayName": "Agent Payments Protocol",
+      "url": "https://api.ezley.com/ap2",
+      "status": "coming-soon",
+      "eta": "M15"
+    }
+  ],
+  "contact": "agents@ezley.com"
+}
