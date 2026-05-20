@@ -1,0 +1,50 @@
+---
+layout: default
+---
+{%- comment -%}
+  Layout for legal & policy pages — Terms, Privacy, Contact, future
+  Acceptable-Use, etc. Narrow prose column for readability; uses Tailwind's
+  typography plugin (loaded via Play CDN in _layouts/default.html).
+
+  Pages using this layout should set:
+    title:          page title (browser tab + h1)
+    description:    meta description for search snippets / OG
+    effective_date: ISO date string e.g. 2026-05-20
+    contact_email:  page-specific email if relevant (privacy@, legal@, etc.)
+{%- endcomment -%}
+
+<section class="bg-surface-tint border-b border-ink-border">
+  <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
+    <h1 class="font-display font-bold text-4xl sm:text-5xl text-ink tracking-tight leading-[1.1]">
+      {{ page.title }}
+    </h1>
+    {% if page.effective_date %}
+      <p class="mt-4 text-sm text-ink-muted">
+        <strong class="text-ink">Last updated:</strong>
+        <time datetime="{{ page.effective_date }}">{{ page.effective_date | date: "%B %-d, %Y" }}</time>
+      </p>
+    {% endif %}
+    {% if page.contact_email %}
+      <p class="mt-2 text-sm text-ink-muted">
+        Questions? Contact <a href="mailto:{{ page.contact_email }}" class="text-primary hover:text-primary-dark underline underline-offset-4">{{ page.contact_email }}</a>.
+      </p>
+    {% endif %}
+  </div>
+</section>
+
+<article class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
+  <div class="prose prose-lg max-w-none
+              prose-headings:font-display prose-headings:tracking-tight prose-headings:text-ink
+              prose-h2:text-2xl prose-h2:mt-12 prose-h2:mb-4
+              prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-3
+              prose-p:text-ink prose-p:leading-relaxed
+              prose-a:text-primary prose-a:no-underline hover:prose-a:underline prose-a:underline-offset-4
+              prose-strong:text-ink prose-strong:font-semibold
+              prose-li:text-ink prose-li:my-1
+              prose-code:text-primary-ink prose-code:bg-primary/10 prose-code:rounded prose-code:px-1 prose-code:py-0.5 prose-code:text-sm prose-code:before:hidden prose-code:after:hidden
+              prose-table:text-sm
+              prose-th:bg-surface-subtle prose-th:text-ink
+              prose-blockquote:border-l-primary prose-blockquote:text-ink-muted prose-blockquote:not-italic">
+    {{ content }}
+  </div>
+</article>
