@@ -9,9 +9,9 @@ contact_email: legal@ezley.com
 
 ## 1. Agreement to these Terms
 
-Ezley is an online marketplace operated by **Tarheel Solutions, LLC** ("Ezley," "we," "us," or "our"). By creating an account on Ezley, accessing the platform, listing an item for sale, or initiating a purchase, you agree to these Terms of Service. If you do not agree, do not use Ezley.
+Ezley is an online marketplace operated by **Tarheel Solutions LLC** ("Ezley," "we," "us," or "our"). By creating an account on Ezley, accessing the platform, listing an item for sale, or initiating a purchase, you agree to these Terms of Service. If you do not agree, do not use Ezley.
 
-These Terms are the binding contract between you and Tarheel Solutions, LLC. They incorporate by reference the [Privacy Policy](/privacy/) and the additional agreements (Seller Agreement, Buyer Terms, Escrow Disclosures) that apply when you list or buy on the marketplace; you will see and accept those agreements at the point in the flow where they become relevant.
+These Terms are the binding contract between you and Tarheel Solutions LLC. They incorporate by reference the [Privacy Policy](/privacy/) and the additional agreements (Seller Agreement, Buyer Terms, Escrow Disclosures) that apply when you list or buy on the marketplace; you will see and accept those agreements at the point in the flow where they become relevant.
 
 ## 2. What Ezley is — and what it is not
 
