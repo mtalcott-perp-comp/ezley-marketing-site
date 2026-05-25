@@ -66,6 +66,7 @@ footer:
     - { label: "How it works", url: "/how-it-works/" }
     - { label: "Pricing",      url: "/pricing/" }
     - { label: "Trust & Safety", url: "/trust/" }
+    - { label: "About",        url: "/about/" }
     - { label: "For agents",   url: "/agents/" }
 
 # ---------- Category front-doors ----------
