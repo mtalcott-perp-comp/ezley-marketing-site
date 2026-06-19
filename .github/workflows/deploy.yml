@@ -60,7 +60,7 @@ jobs:
         # base_path is automatically empty when a custom domain (CNAME) is set,
         # so this single command works both for the project-page URL
         # (mtalcott-perp-comp.github.io/ezley-marketing-site/) and for the
-        # future ezley.com custom domain — no rebuild required.
+        # about.ezley.com custom domain — no rebuild required.
         run: bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}"
 
       - name: Upload artifact

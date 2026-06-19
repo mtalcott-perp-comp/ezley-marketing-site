@@ -11,4 +11,4 @@ User-agent: *
 Allow: /
 
 # Discovery surfaces
-Sitemap: https://ezley.com/sitemap.xml
+Sitemap: https://about.ezley.com/sitemap.xml

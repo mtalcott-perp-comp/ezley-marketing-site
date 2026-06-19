@@ -7,22 +7,22 @@ sitemap: false
 
 > Ezley is the open, agent-native marketplace for high-trust, high-value, peer-to-peer commerce. Listings are polymorphic with category-specific structured specs. Trust services (escrow, identity verification, dispute resolution, concierge support) are paid; listings are free. AI agents are first-class citizens on both buyer and seller sides.
 
-This site is the public brand surface at [ezley.com](https://ezley.com). The marketplace application (browse, listing detail, auth, checkout, dashboards) lives at [app.ezley.com](https://app.ezley.com). The HTTP / agent-protocol API lives at [api.ezley.com](https://api.ezley.com).
+This site is the public brand surface at [about.ezley.com](https://about.ezley.com). The marketplace application (browse, listing detail, auth, checkout, dashboards) lives at [ezley.com](https://ezley.com). The HTTP / agent-protocol API lives at [api.ezley.com](https://api.ezley.com).
 
 ## What Ezley is
 
-- [Ezley.com](https://ezley.com): Brand surface, trust pitch, competitor contrast.
-- [How it works](https://ezley.com/how-it-works/): The buyer flow and seller flow end-to-end, glossary-strict.
-- [Pricing](https://ezley.com/pricing/): Bundled fee per payment path (Wire / ACH / Card). Free to list.
-- [Trust & Safety](https://ezley.com/trust/): Identity tiers, escrow flow, dispute process.
-- [For agents](https://ezley.com/agents/): Agent-native posture, protocol implementation status, discovery surface.
+- [about.ezley.com](https://about.ezley.com): Brand surface, trust pitch, competitor contrast.
+- [How it works](https://about.ezley.com/how-it-works/): The buyer flow and seller flow end-to-end, glossary-strict.
+- [Pricing](https://about.ezley.com/pricing/): Bundled fee per payment path (Wire / ACH / Card). Free to list.
+- [Trust & Safety](https://about.ezley.com/trust/): Identity tiers, escrow flow, dispute process.
+- [For agents](https://about.ezley.com/agents/): Agent-native posture, protocol implementation status, discovery surface.
 
 ## Live category front-doors
 
-- [Ezley Equipment (W1, live)](https://ezley.com/tractors/): Tractors, combines, implements, attachments.
-- [Ezley Motors (W2, coming soon)](https://ezley.com/cars/): Used cars, peer-to-peer, agent-assisted.
-- [Ezley Gear (W3, coming soon)](https://ezley.com/cameras/): Cameras, instruments, bicycles, power tools.
-- [Ezley Home (W4, coming soon)](https://ezley.com/furniture/): Furniture, appliances, sporting goods, collectibles.
+- [Ezley Equipment (W1, live)](https://about.ezley.com/tractors/): Tractors, combines, implements, attachments.
+- [Ezley Motors (W2, coming soon)](https://about.ezley.com/cars/): Used cars, peer-to-peer, agent-assisted.
+- [Ezley Gear (W3, coming soon)](https://about.ezley.com/cameras/): Cameras, instruments, bicycles, power tools.
+- [Ezley Home (W4, coming soon)](https://about.ezley.com/furniture/): Furniture, appliances, sporting goods, collectibles.
 
 ## Agent endpoints (point to api.ezley.com)
 
@@ -38,9 +38,9 @@ This site is the public brand surface at [ezley.com](https://ezley.com). The mar
 
 ## Optional
 
-- [Sitemap](https://ezley.com/sitemap.xml): Machine-readable site index.
-- [robots.txt](https://ezley.com/robots.txt): Crawl policy. All user-agents are allowed.
-- [mcp.json](https://ezley.com/mcp.json): MCP server manifest (placeholder until the M3 endpoint ships).
+- [Sitemap](https://about.ezley.com/sitemap.xml): Machine-readable site index.
+- [robots.txt](https://about.ezley.com/robots.txt): Crawl policy. All user-agents are allowed.
+- [mcp.json](https://about.ezley.com/mcp.json): MCP server manifest (placeholder until the M3 endpoint ships).
 
 ## Get in touch
 
