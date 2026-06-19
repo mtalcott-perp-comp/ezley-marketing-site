@@ -13,7 +13,7 @@ sitemap: false
     "url": "https://ezley.com"
   },
   "homepage": "https://ezley.com",
-  "documentation": "https://ezley.com/agents/",
+  "documentation": "https://about.ezley.com/agents/",
   "status": "preview",
   "statusNote": "MCP server endpoint targeted for M3 (Aug 2026). This manifest is published now so agents can discover Ezley and plan integration. The endpoint URL below will become live at M3.",
   "transports": [

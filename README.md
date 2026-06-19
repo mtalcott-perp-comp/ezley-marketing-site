@@ -7,17 +7,17 @@ This repo is **not** the marketplace app itself. The marketplace app lives in:
 - `ezley-market-net-api` — .NET 9 API (event-sourced)
 - `ezley-market-ui-react` — React 18 + TS + MUI 5 buyer/seller/admin UI
 
-This repo serves the **marketing surface** of `ezley.com`:
+This repo serves the **marketing surface** at `about.ezley.com`:
 
 - The root home page — what Ezley is, who it's for, why it's different
-- Category front doors — `ezley.com/tractors`, `/cars`, `/cameras`, `/furniture` (sub-brand landing pages per [01-vision.md](../../ezley-docs/01-vision.md))
+- Category front doors — `about.ezley.com/tractors`, `/cars`, `/cameras`, `/furniture` (sub-brand landing pages per [01-vision.md](../../ezley-docs/01-vision.md))
 - "How it works" — escrow, identity verification, dispute resolution, concierge
 - "Why Ezley" — head-to-head against eBay / Facebook Marketplace / Craigslist / TractorHouse / Machinery Pete
 - Pricing — path-tiered, single bundled rate (per [D-019](../../ezley-docs/09-decisions.md))
 - Trust & safety — public dispute statistics, identity tiers, escrow flow
 - Agent-readiness — MCP / ACP / UCP / AP2 documentation surface
 
-CTAs deep-link into the marketplace app (`app.ezley.com` or equivalent) for actual signup, listing creation, and buying.
+CTAs deep-link into the marketplace app (`ezley.com`) for actual signup, listing creation, and buying.
 
 ## Status
 

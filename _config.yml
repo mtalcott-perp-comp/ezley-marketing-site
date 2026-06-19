@@ -11,7 +11,7 @@ description:      >-
                   Ezley is the open marketplace for high-trust, high-value,
                   peer-to-peer commerce. Sell or buy serious used goods with
                   escrow-held funds and identity-verified counterparties.
-url:              "https://ezley.com"
+url:              "https://about.ezley.com"
 baseurl:          ""
 repository:       "" # set after `git init && gh repo create` per quickstart.md
 locale:           "en-US"
@@ -78,5 +78,5 @@ category_front_doors:
 
 # ---------- Site-wide CTA defaults ----------
 cta:
-  app_url: "https://app.ezley.com"
+  app_url: "https://ezley.com"
   utm_source: "marketing-site"
