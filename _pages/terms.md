@@ -3,7 +3,7 @@ layout: legal
 permalink: /terms/
 title: "Terms of Service"
 description: "The terms that govern your use of the Ezley marketplace — eligibility, accounts, transactions, escrow, fees, disputes, and the limits of Ezley's role as a marketplace facilitator."
-effective_date: 2026-05-20
+effective_date: 2026-06-27
 contact_email: legal@ezley.com
 ---
 
@@ -19,13 +19,13 @@ Ezley is **a marketplace facilitator**. We provide:
 
 - A platform where Sellers list items and Buyers purchase them.
 - Identity verification (basic / verified / trusted-seller tiers).
-- Payment processing and escrow services via Stripe Connect.
+- Access to payment processing and escrow services provided by licensed third parties — a payments processor (Stripe) for card and ACH, and a licensed escrow provider for wire transfers.
 - Optional concierge support for early-market Transactions.
 - Dispute mediation when Buyers and Sellers disagree.
 
 Ezley is **NOT**:
 
-- A party to any Transaction between a Buyer and a Seller. The Buyer and Seller form a direct sales contract between themselves. Ezley facilitates that contract and holds the funds; Ezley does not sell the item.
+- A party to any Transaction between a Buyer and a Seller. The Buyer and Seller form a direct sales contract between themselves. Ezley facilitates that contract and coordinates escrow through a licensed third party that holds the funds; Ezley does not itself take custody of the funds and does not sell the item.
 - The owner or inspector of any Listing. We do not warehouse, inspect, or warrant the condition of items listed by Sellers.
 - A financial institution, money transmitter, broker, or registered agent unless and until explicitly stated.
 - A dealer in any regulated goods category. Sellers offering vehicles, firearms, controlled substances, alcohol, or other regulated items remain subject to all applicable state and federal law independent of Ezley's platform.
@@ -77,7 +77,7 @@ We may remove content that we determine, in our sole discretion, to violate thes
 
 ## 7. Transactions and Escrow
 
-Every purchase on Ezley flows through **Escrow** via our Stripe Connect platform account. The Buyer's funds are held by Ezley until the Transaction reaches one of these terminal states:
+Every purchase on Ezley flows through **Escrow** operated by a licensed third party — our payments processor (Stripe) for card and ACH transactions, and a licensed escrow provider for wire transfers. The Buyer's funds are held by that licensed provider, not by Ezley, until the Transaction reaches one of these terminal states:
 
 - **Released** — funds transferred to the Seller after handover and the dispute window.
 - **Refunded** — funds returned to the Buyer (mutual cancellation, dispute decision, wire timeout).
