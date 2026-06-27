@@ -29,7 +29,7 @@ home:
     - "Wire payment supported on high-value transactions"
     - "Buyer funds held in escrow until handover confirmed"
     - "Identity-verified sellers"
-    - "Concierge support in your county"
+    - "Concierge support from a real person"
   how_it_works_preview:
     section_title: "How it works"
     buyer_flow:    "Browse → Offer → Buyer funds Escrow → Handover → Buyer confirms → Auto-release → Seller paid"
@@ -42,17 +42,17 @@ tractors:
   title_pattern:    "Ezley Equipment — Tractors, Combines, Implements | Ezley"
   hero:
     headline:       "Sell your equipment to a verified buyer."
-    sub:            "Wire payment supported. No shipping required. Concierge available in your county."
+    sub:            "Wire payment supported. No shipping required. Real-person concierge support."
     cta_primary:    "Start selling"
   body_intro:       >-
                     Ezley Equipment covers tractors, combines, implements,
                     and attachments — wire-payment friendly, no-shipping-required,
-                    and concierge-supported in your county.
+                    and backed by real-person concierge support.
   trust_signals:
     - "Wire payment supported — no chargeback risk on a $50K tractor"
     - "Buyer funds held in escrow until handover confirmed"
     - "Identity-verified sellers and buyers"
-    - "Concierge support — Ezley operator visits both parties in person for the first transaction"
+    - "Concierge support — a real person reviews high-value listings and is reachable on your transaction"
 
 # ---------- /cars, /cameras, /furniture coming-soon (FR-MKT-023) ----------
 coming_soon:
@@ -95,7 +95,7 @@ how_it_works:
     steps:
       - "Browse listings — every Listing has a category, structured spec, photos, price, and seller."
       - "Make an Offer — propose your price; seller accepts, counters, or declines."
-      - "Buyer funds Escrow — your money is Captured into the Ezley escrow account (operated via Stripe Connect), not the seller's account."
+      - "Buyer funds Escrow — your money is Captured into escrow and held by a licensed partner (card and ACH through our payments processor; larger wires through a licensed escrow provider), not the seller's account and not Ezley's."
       - "Handover — you and the seller arrange the physical handover, in person or with a coordinated carrier."
       - "Buyer confirms receipt — you mark the Transaction as received."
       - "Auto-release — when the window you chose at offer-accept passes, escrow releases to the seller. Confirming receipt yourself releases it sooner. If you spot a problem after release, you still have a window to open a dispute and freeze the funds."

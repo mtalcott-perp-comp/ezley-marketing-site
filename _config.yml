@@ -65,6 +65,7 @@ footer:
   links:
     - { label: "How it works", url: "/how-it-works/" }
     - { label: "Pricing",      url: "/pricing/" }
+    - { label: "Is Ezley safe?", url: "/is-it-safe/" }
     - { label: "Trust & Safety", url: "/trust/" }
     - { label: "About",        url: "/about/" }
     - { label: "For agents",   url: "/agents/" }

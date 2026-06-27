@@ -47,7 +47,7 @@ If you're building an AI buying or selling agent that should work with Ezley —
 
 ## Concierge support
 
-For sellers and buyers already in an active Transaction, the fastest concierge channel is in-app — open the Transaction in the marketplace app and use the concierge contact button. Most Transactions in our launch counties have a named concierge operator assigned. For pre-Transaction concierge interest (selling your first piece of equipment, asking about a category), email support@ezley.com.
+For sellers and buyers already in an active Transaction, the fastest concierge channel is in-app — open the Transaction in the marketplace app and use the concierge contact button. Many active Transactions have a named concierge operator you can reach directly. For pre-Transaction concierge interest (selling your first piece of equipment, asking about a category), email support@ezley.com.
 
 ## Mailing address
 
