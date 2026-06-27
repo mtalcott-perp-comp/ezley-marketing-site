@@ -3,13 +3,13 @@ layout: legal
 permalink: /privacy/
 title: "Privacy Policy"
 description: "What information Ezley collects, how we use it, who we share it with, and the choices you have. We do not sell personal information."
-effective_date: 2026-05-20
+effective_date: 2026-06-27
 contact_email: privacy@ezley.com
 ---
 
 ## 1. Who we are
 
-Ezley is an online marketplace operated by **Tarheel Solutions, LLC** ("Ezley," "we," "us," or "our") at **ezley.com** (and related domains), where individuals and small businesses ("Sellers") offer high-value used goods to other individuals and small businesses ("Buyers"). Ezley provides the platform, identity verification, escrow services (via Stripe Connect), dispute mediation, and an optional concierge support program. This Privacy Policy explains what personal information we collect from visitors and registered users, how we use it, who we share it with, and the choices you have.
+Ezley is an online marketplace operated by **Tarheel Solutions, LLC** ("Ezley," "we," "us," or "our") at **ezley.com** (and related domains), where individuals and small businesses ("Sellers") offer high-value used goods to other individuals and small businesses ("Buyers"). Ezley provides the platform, identity verification, access to escrow services (provided by licensed third parties — Stripe for card and ACH, and a licensed escrow provider for wire transfers), dispute mediation, and an optional concierge support program. This Privacy Policy explains what personal information we collect from visitors and registered users, how we use it, who we share it with, and the choices you have.
 
 ## 2. What we collect
 
