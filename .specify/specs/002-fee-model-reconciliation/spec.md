@@ -3,9 +3,9 @@
 **Feature Branch**: `002-fee-model-reconciliation`
 **Feature ID**: F-MKT-004 (proposed)
 **Created**: 2026-06-28
-**Status**: Draft — `specify` phase. `clarify` / `plan` (see companion `plan.md`) / `tasks` / `analyze` / `implement` to follow.
+**Status**: Draft — `analyze` fixups applied; `tasks.md` generated. `implement` to follow.
 **Input**: Founder directive (2026-06-28) to rewrite the public pricing story to **Decision D-040** (ticket-size seller fee + buyer protection fee; rail-based pricing abolished; verification no longer affects price).
-**Source pinning**: D-040 (locked model supplied by the founder; not yet committed to `ezley-docs/09-decisions.md` as of 2026-06-28 — latest committed decision is D-037). This spec treats the D-040 locked values below as authoritative and MUST be re-pinned to the committed decision before `implement`.
+**Source pinning**: **D-040 (Accepted 2026-06-28), committed to `ezley-docs/09-decisions.md` on `origin/main`.** Its sibling decisions D-038 and D-039 are committed alongside it. The locked values below trace to the committed D-040 entry and are authoritative for this spec.
 
 ## Canonical location
 
@@ -26,14 +26,25 @@ There is also a **pre-existing drift** the new model resolves: the site advertis
 
 > These are the authoritative values for this spec. Every rendered number traces here and is sourced from config at build time (P-09) — never inlined into a template or copy string.
 
+**Canonical numbers to publish (match D-040 exactly).** Seller fee **12%** (minimum **$5**) / **8.5%** / **7%** / **5%** by ticket size; **buyer protection fee 2.5%, capped at $2,500**, on escrow sales (**$200 and up**); **Lite** under $200 (no escrow, no buyer fee); **free to list**; **$20 listing minimum**; **verification price-neutral**. No public surface may display any number that differs from this set.
+
 ### Seller fee — by ticket size (replaces rail tiers)
 
 | Ticket size (sale price) | Seller fee | Floor |
 |---|---|---|
 | Under $200 | **12%** | minimum **$5** |
 | $200 – $50,000 | **8.5%** | — |
-| $50,000 – $150,000 | **7%** | — |
+| Over $50,000 – $150,000 | **7%** | — |
 | Over $150,000 | **5%** | — |
+
+**Boundary convention (Q2 — ratified by Tech Lead).** The bottom band is **"under $200" (exclusive)**; every higher boundary is **inclusive**. The four bands are **non-overlapping and exhaustive**:
+
+- **12%** — under $200
+- **8.5%** — $200 to $50,000 (inclusive both ends)
+- **7%** — over $50,000 to $150,000 (inclusive at $150,000)
+- **5%** — over $150,000
+
+So **exactly $200 → 8.5%**, **exactly $50,000 → 8.5%**, **exactly $150,000 → 7%**. Worked examples MUST follow this (e.g. a **$50,000 sale = 8.5%**).
 
 - **Free to list.** No insertion fee, no subscription.
 - **$20 listing minimum** (a listing's price floor; the lowest sale price Ezley supports).
@@ -86,7 +97,8 @@ Follows the SpecKit handoff workflow in `ezley-docs/10-speckit-handoff.md`, the 
 
 | ID | Title | Effect on this spec |
 |---|---|---|
-| D-040 | Fee model: ticket-size seller fee + buyer protection fee; rails abolished; verification price-neutral | The entire spec. Locked values above. |
+| D-040 | Fee model: ticket-size seller fee + buyer protection fee; rails abolished; verification price-neutral | The entire spec. Locked values above. **Committed (Accepted 2026-06-28) to `ezley-docs/09-decisions.md` on `origin/main`.** |
+| D-038 / D-039 | Premium-band take-rate; four-rate schedule + Lite tier + buyer-paid protection fee | Strategic parents of D-040; both committed alongside D-040. |
 | D-019 | Take-rate by payment path, single bundled rate | **Superseded for pricing by D-040.** Rail tiers and the "one bundled fee per path" framing are removed. |
 | D-016 / P-11 | Free venue, paid trust + paid distribution | Retained — "Free to list. Pay only when you sell." survives; only the *shape* of the fee changes. |
 | D-024 | Tier card/ACH/wire by VerificationTier | **Reversed for pricing** — verification no longer changes price. |
@@ -138,8 +150,8 @@ Follows the SpecKit handoff workflow in `ezley-docs/10-speckit-handoff.md`, the 
 **So that** the public fee story can never drift from what the system charges.
 
 **Acceptance**
-- **Given** `_data/config.yml`, **then** its fee keys match the API's `/api/config/public` D-040 shape **key-for-key** and **value-for-value** (FR-FEE-020).
-- **Given** the build, **then** `scripts/fetch-config.sh` overwrites the snapshot from the live endpoint; the committed snapshot is last-known-good only.
+- **Given** `_data/config.yml`, **then** its **displayed** D-040 numbers (band rates, $5 floor, 2.5% buyer fee, $2,500 cap, $20 listing minimum, $200 escrow boundary) equal the canonical D-040 set value-for-value. The site config is **hand-authored for display and uses dollars** (not the API's cents keys); it does **not** need to mirror the API's exact key names unless/until a `scripts/fetch-config.sh` fetch script actually exists (Q1, FR-FEE-020).
+- **Given** a future `scripts/fetch-config.sh`, **when** it exists and fetches, **then** the exact API key names (Q1) and unit conversion become load-bearing; until then the static dollar numbers do **not** block on the API contract.
 - **Given** any rendered page, **then** **zero** D-040 fee numbers are hard-coded in a template or copy file (P-09 grep test, FR-FEE-021).
 
 ### User Story 5 — Legal-gated terms rewrite (P1, gated)
@@ -159,7 +171,7 @@ Follows the SpecKit handoff workflow in `ezley-docs/10-speckit-handoff.md`, the 
 
 - **FR-FEE-001** — `/pricing` renders **four ticket-size bands** (Under $200 / $200–$50K / $50K–$150K / Over $150K) with rates **12% / 8.5% / 7% / 5%** and the **$5 minimum** on the under-$200 band, all from config. *(Reverses FR-MKT-041..043 rail cards.)*
 - **FR-FEE-002** — The seller section states **"Free to list"** and the **$20 listing minimum**, both from config where the minimum is a config value.
-- **FR-FEE-003** — Worked examples (if retained) compute the seller fee **live from config** at the band boundaries; amounts chosen for clean arithmetic. *(Adapts FR-MKT-045.)*
+- **FR-FEE-003** — Worked examples (if retained) compute the seller fee **live from config** and use the **ratified boundary convention** (Q2): a **$50,000 sale = 8.5%** (not 7%), a sale of exactly $150,000 = 7%, a $100 sale hits the $5 floor. Amounts chosen for clean arithmetic. *(Adapts FR-MKT-045.)*
 - **FR-FEE-004** — The seller section shows **one clean number** per band; **no** Stripe / Connect / "concierge fee" / reserve / itemized-breakdown language (P-14 grep test retained from FR-MKT-044).
 - **FR-FEE-005** — **No rail (Wire/ACH/Card) appears as a fee tier** in seller fee copy. Rail mentions are permitted only as payment *mechanics*, never as a rate.
 - **FR-FEE-006** — **No verification-tier-affects-price** statement appears anywhere.
@@ -173,9 +185,9 @@ Follows the SpecKit handoff workflow in `ezley-docs/10-speckit-handoff.md`, the 
 
 ### Functional Requirements — config + cross-repo contract
 
-- **FR-FEE-020** — `_data/config.yml` fee keys mirror `/api/config/public`'s **D-040 shape key-for-key and value-for-value**. The exact key names are owned by the API; this spec's `plan.md` proposes a shape and flags it as **`[NEEDS CONFIRMATION from net-api]`** until the API's D-040 contract is published. The current rail keys (`pricing.cardTakeRatePct`, `pricing.achTakeRatePct`, `pricing.wireTakeRatePct`) and the `payments.cardMaxAmount` / `payments.wireOnlyMinAmount` rail thresholds are **removed or replaced** to match.
-- **FR-FEE-021** — **Zero inline fee constants.** A build-time grep asserts no D-040 percentage or dollar threshold appears as a literal in any `_pages/*` or copy file (P-09).
-- **FR-FEE-022** — `scripts/fetch-config.sh` is updated to fetch and validate the new D-040 keys; the build fails if a required key is absent (so the site can never silently render a stale rail rate).
+- **FR-FEE-020** — `_data/config.yml` is **hand-authored for display in dollars**. Its **displayed D-040 numbers MUST equal the canonical set** (band rates 12/8.5/7/5, $5 floor, 2.5% buyer fee, $2,500 cap, $20 listing minimum, $200 escrow boundary). It does **not** need to literally mirror the API's cents-based key names; key-for-key parity with `/api/config/public` is required **only if and when** `scripts/fetch-config.sh` actually exists and fetches (Q1). The current rail keys (`pricing.cardTakeRatePct`, `pricing.achTakeRatePct`, `pricing.wireTakeRatePct`) and the `payments.cardMaxAmount` / `payments.wireOnlyMinAmount` rail thresholds are **removed or replaced** by the D-040 display shape regardless.
+- **FR-FEE-021** — **Zero inline fee constants.** A build-time grep asserts no D-040 percentage or dollar threshold appears as a literal in any `_pages/*` or copy file (P-09); every rendered number resolves from `_data/config.yml`.
+- **FR-FEE-022** — *(deferred — only if a fetch script exists)* If `scripts/fetch-config.sh` exists, it validates the D-040 keys it fetches and fails the build on a missing required key (so the site can never silently render a stale rail rate). The static dollar display config does **not** depend on this script; absent the script, the committed `_data/config.yml` is the source of the displayed numbers.
 
 ### Functional Requirements — other marketing surfaces
 
@@ -189,9 +201,8 @@ Follows the SpecKit handoff workflow in `ezley-docs/10-speckit-handoff.md`, the 
 ### Functional Requirements — legal (gated)
 
 - **FR-FEE-040** — `terms.md §8 (Fees)` is rewritten to the D-040 model: ticket-size seller fee, $20 listing minimum, **buyer protection fee (2.5% capped $2,500) on escrow sales $200+**, verification-price-neutral. The "Buyers do not pay Ezley directly" sentence is **removed/replaced**. The mixed-rail sentence ("each capture event is priced at its own rail") is removed (rails gone).
+- **FR-FEE-014** — `privacy.md` is checked for consistency with a buyer-paid protection fee — **light review only**, no edit required unless something there contradicts the buyer fee. `privacy.md` already describes buyer-funded escrow via licensed partners and is **not** on the §8 critical path. *(This is the single privacy-check requirement; the former duplicate FR-FEE-042 is collapsed into this lower-numbered id.)*
 - **FR-FEE-041** — §8 is **not published** without counsel sign-off (R-LEGAL-1); `effective_date` bumped (R-LEGAL-2); §15 30-day-notice resolved (R-LEGAL-3).
-- **FR-FEE-042** — `privacy.md` is checked (FR-FEE-014 → renumbered here) — no edit required unless something contradicts a buyer-paid protection fee.
-- **FR-FEE-014** — *(privacy check, see FR-FEE-042)* — light review only; privacy already describes buyer-funded escrow via licensed partners and is not on the §8 critical path.
 
 ### Non-Functional Requirements
 
@@ -212,18 +223,17 @@ If counsel confirms the 30-day notice applies, the buyer-fee copy and §8 go liv
 
 - Any API change to `/api/config/public` (owned by `ezley-market-net-api`; this spec only consumes it and depends on its D-040 shape).
 - The marketplace UI's checkout fee display (owned by `ezley-market-ui-react`).
-- Committing D-040 to `ezley-docs/09-decisions.md` (docs-repo task; this spec re-pins to it once committed).
 - Publishing dispute SLA / resolution-rate numbers (still deferred per `001` Q8).
 
 ## Dependencies
 
 - **`ezley-market-net-api`** — `/api/config/public` must expose the D-040 fee shape (ticket-size bands, buyer protection rate + cap, $20 listing minimum, $200 escrow boundary) before Track A's config swap can fetch real values. **Blocking** for FR-FEE-020/022.
-- **`ezley-docs`** — D-040 to be recorded in `09-decisions.md` (and glossary updated: ticket-size bands, buyer protection fee, Lite/escrow split). Re-pin this spec to it.
+- **`ezley-docs`** — D-040 is **recorded in `09-decisions.md` on `origin/main`** (Accepted 2026-06-28); this spec is pinned to it. Glossary update (ticket-size bands, buyer protection fee, Lite/escrow split) is a separate docs-repo task and does not block this spec.
 - **Counsel** — Track B gate.
 
 ## Open questions / `[NEEDS CLARIFICATION]`
 
-- **Q1** — Exact `/api/config/public` **key names** for the D-040 shape (band thresholds, band rates, the $5 floor, buyer protection rate + cap, $20 listing minimum, $200 escrow boundary). `plan.md` proposes a shape; **must be confirmed by net-api** before implement.
-- **Q2** — Are the band boundaries **inclusive/exclusive** at $200 / $50,000 / $150,000? (e.g. is exactly $50,000 charged 8.5% or 7%?) Needed for correct worked examples and to match the API's comparison operators.
-- **Q3** — Does §15's 30-day material-change notice apply to introducing a buyer fee? (Counsel — drives release phasing.)
+- **Q1** *(open, but does NOT block the static numbers)* — Exact `/api/config/public` **key names** and units (cents vs dollars) for the D-040 shape. Relevant **only to a future `scripts/fetch-config.sh`**; the hand-authored dollar display config publishes the canonical numbers without it. Confirm with net-api before any fetch-script work.
+- **Q2** *(RESOLVED — ratified by Tech Lead)* — Band boundaries: bottom band **"under $200" (exclusive)**; higher boundaries **inclusive**. So exactly **$200 → 8.5%**, **$50,000 → 8.5%**, **$150,000 → 7%**. Bands are non-overlapping and exhaustive (see "The locked model"). Worked examples use this (a $50,000 sale = 8.5%).
+- **Q3** *(genuinely open — counsel)* — Does §15's 30-day material-change notice apply to introducing a buyer fee? Drives Track B release phasing. Must be answered in writing by counsel.
 - **Q4** — Should the home teaser show a representative number at all, or go number-free to avoid implying a single headline rate now that fees are size-banded?

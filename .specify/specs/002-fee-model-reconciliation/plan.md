@@ -26,24 +26,26 @@ Track B  (LEGALLY GATED — counsel sign-off required)
 
 The buyer protection fee copy (Track A step 4) is **authored but hidden** behind a config flag so the seller-side rewrite ships immediately while the buyer fee waits for the §15 notice window.
 
-## Proposed config shape — `[NEEDS CONFIRMATION from net-api]`
+## Config shape — hand-authored in dollars for display
 
-The exact keys are owned by `/api/config/public`. This is the **proposed** shape the site will mirror key-for-key (FR-FEE-020); confirm before implement (spec Q1/Q2).
+`_data/config.yml` is **hand-authored for display and uses dollars** (not the API's cents keys). Its **displayed D-040 numbers MUST equal the canonical set** (FR-FEE-020); key-for-key parity with `/api/config/public` is required **only if and when** `scripts/fetch-config.sh` actually exists and fetches (spec Q1). The shape below is the display shape the site renders from.
 
 ```yaml
-# _data/config.yml  (D-040 — replaces the rail block)
+# _data/config.yml  (D-040 — replaces the rail block; dollars, hand-authored for display)
 pricing:
   # Seller fee by ticket size. Ordered bands; each band has an upper bound
-  # (cents or dollars — MATCH the API's unit) and a rate. Floor only on band 1.
+  # in DOLLARS and a rate. Floor only on band 1.
+  # Boundary convention (Q2, ratified): bottom band exclusive ("under $200");
+  # higher boundaries inclusive. maxAmount = inclusive upper bound of the band.
   sellerFeeBands:
-    - { maxAmount: 200,    ratePct: 12,  minFee: 5 }   # under $200, $5 floor
-    - { maxAmount: 50000,  ratePct: 8.5 }              # $200–$50K
-    - { maxAmount: 150000, ratePct: 7 }                # $50K–$150K
-    - { maxAmount: null,   ratePct: 5 }                # over $150K
+    - { maxAmount: 200,    ratePct: 12,  minFee: 5 }   # under $200, $5 floor (exclusive upper)
+    - { maxAmount: 50000,  ratePct: 8.5 }              # $200–$50,000 inclusive  → $200 & $50,000 = 8.5%
+    - { maxAmount: 150000, ratePct: 7 }                # over $50,000–$150,000 incl → $150,000 = 7%
+    - { maxAmount: null,   ratePct: 5 }                # over $150,000
   buyerProtectionFeePct: 2.5
   buyerProtectionFeeCapDollars: 2500
   listingMinimumDollars: 20
-  escrowMinAmount: 200      # >= this = escrow; below = Lite
+  escrowMinAmount: 200      # $200 and up = escrow; below = Lite
 
 # REMOVED from the old snapshot:
 #   pricing.cardTakeRatePct / achTakeRatePct / wireTakeRatePct
@@ -53,7 +55,7 @@ pricing:
 #   listings.*  (review thresholds, photo counts)
 ```
 
-> Inclusive/exclusive boundary at $200 / $50K / $150K is **Q2** — the band `maxAmount` comparator MUST match the API's. The site renders bands; it does not decide boundaries.
+> **Boundary convention is ratified (Q2):** bottom band "under $200" exclusive; higher boundaries inclusive — exactly $200 → 8.5%, $50,000 → 8.5%, $150,000 → 7%. Worked examples MUST use this (a **$50,000 sale = 8.5%**). The API's exact comparator/key names (Q1) only become load-bearing once a fetch script exists.
 
 ## File-by-file change plan
 
@@ -61,7 +63,7 @@ pricing:
 
 **`_data/config.yml`** — Replace the `pricing:` rail block (`cardTakeRatePct` / `achTakeRatePct` / `wireTakeRatePct`) and the rail thresholds in `payments:` (`cardMaxAmount`, `wireOnlyMinAmount`) with the D-040 shape above. Update the header comment (snapshot date, "D-040" source note). `autoReleaseHoursDefault`, `depositPercentDefault`, and the `listings:` block stay. *(FR-FEE-020)*
 
-**`scripts/fetch-config.sh`** *(verify path; create if absent)* — Update the key allow-list / validation so the build **fails** if any required D-040 key is missing, preventing a silent stale-rail render. *(FR-FEE-022)*
+**`scripts/fetch-config.sh`** *(deferred — only if it exists)* — Verify whether this script exists. The static dollar display config does **not** depend on it. If it exists, update its key allow-list / validation so the build **fails** if any required D-040 key is missing, preventing a silent stale-rail render. If it does **not** exist, the committed `_data/config.yml` is the source of the displayed numbers and no script work is in scope. *(FR-FEE-022)*
 
 ### Track A — `/pricing` (the core rewrite)
 
@@ -100,15 +102,15 @@ pricing:
 
 **`_pages/terms.md`** — §8 (Fees, lines ~88–100) rewritten to D-040: ticket-size seller bands, $20 listing minimum, **buyer protection fee 2.5% capped $2,500 on escrow sales $200+**, verification-price-neutral. **Delete** "Buyers do not pay Ezley directly…" and the mixed-rail "each capture event is priced at its own rail" sentence. Bump front-matter `effective_date` (line 6, currently `2026-06-27`). Cross-check §15 (line ~137) 30-day-notice clause. **Gated on R-LEGAL-1/2/3.** *(FR-FEE-040, FR-FEE-041)*
 
-**`_pages/privacy.md`** — Light check only. It already describes buyer-funded escrow via licensed partners (no "buyers don't pay Ezley" claim), so likely no edit. Confirm nothing contradicts a buyer-paid protection fee. *(FR-FEE-042)*
+**`_pages/privacy.md`** — Light check only. It already describes buyer-funded escrow via licensed partners (no "buyers don't pay Ezley" claim), so likely no edit. Confirm nothing contradicts a buyer-paid protection fee. *(FR-FEE-014)*
 
 ## Risks
 
 - **R1 (highest) — Legal.** `terms.md §8` reverses a binding "buyers don't pay" promise; the §15 30-day notice may delay the buyer-fee reveal. Mitigation: two-track phasing + config-flagged buyer copy (ships dark).
-- **R2 — Config drift / cross-repo blocker.** Track A's config swap can't fetch real values until `/api/config/public` exposes the D-040 shape. Mitigation: confirm key names (Q1) with net-api first; `fetch-config.sh` fails the build on missing keys (FR-FEE-022).
-- **R3 — Boundary semantics (Q2).** Inclusive/exclusive band edges at $200/$50K/$150K must match the API or worked examples will misstate fees. Mitigation: mirror the API comparator; the site never decides boundaries.
+- **R2 — Config drift (de-risked).** The site config is hand-authored in dollars for display; the displayed numbers equal the canonical D-040 set and do **not** block on the API contract. Cross-repo key-for-key parity only matters once a `fetch-config.sh` exists (Q1, FR-FEE-022). Mitigation: publish the canonical dollar numbers now; defer API-key alignment to the fetch script.
+- **R3 — Boundary semantics (Q2, RESOLVED).** Ratified by the Tech Lead: bottom band "under $200" exclusive; higher boundaries inclusive — exactly $200 → 8.5%, $50,000 → 8.5%, $150,000 → 7%. Worked examples and config `maxAmount` follow this; no longer an open risk.
 - **R4 — Stale-rail leakage.** Old "5.5% card" strings hide in meta descriptions and the existing Card-5.5%-vs-API-8.5% drift. Mitigation: the P-09 grep guard plus a full-repo grep for `5.5`, `3.5`, `3.0`, "payment path", "Wire/ACH/Card" before merge.
-- **R5 — Spec not yet pinned to a committed decision.** D-040 lives only in the founder directive as of 2026-06-28 (latest committed is D-037). Mitigation: re-pin spec + plan to `ezley-docs/09-decisions.md#D-040` once committed; treat the locked values as authoritative meanwhile.
+- **R5 — Boundary semantics now ratified (was: provenance).** D-040 is **committed (Accepted 2026-06-28) to `ezley-docs/09-decisions.md` on `origin/main`**, and the band-boundary convention (Q2) is **ratified by the Tech Lead**: bottom band "under $200" (exclusive); higher boundaries inclusive — exactly $200 → 8.5%, $50,000 → 8.5%, $150,000 → 7%. Worked examples and the config `maxAmount` comparators MUST follow this; the API's comparator confirmation (Q1) only matters once a fetch script exists.
 
 ## Definition of done (Track A)
 
