@@ -129,18 +129,50 @@ how_it_works:
                    the transaction. A named Ezley operator handles each case,
                    with documented adjudication steps and the right to escalate.
 
-# ---------- /pricing (US4) ----------
+# ---------- /pricing (US4) — D-040 fee model ----------
+# Copy frames numbers; every fee/threshold renders from site.data.config,
+# never inlined here (P-09).
 pricing:
   hero_headline:   "Free to list. Pay only when you sell."
   intro:           >-
-                   One Ezley fee, bundled by payment path. No listing fee.
-                   No subscription. Pay only on completed transactions.
-  rate_card_inclusion: "Includes escrow protection, dispute resolution, payment processing, and concierge support — all included."
+                   Your fee scales with the size of your sale — one clean rate,
+                   nothing else. No listing fee. No subscription. No charge until
+                   the sale completes.
+  # Seller ticket-size section.
+  seller:
+    section_title:   "What you pay as a seller"
+    section_intro:   >-
+                     Your rate is set by the sale price alone — not the payment
+                     method, not your verification tier. The bigger the sale,
+                     the lower the rate.
+    band_caption:    "of the completed sale"
+    min_fee_note:    "minimum fee"
+    listing_min_note: "Free to list. The lowest price Ezley supports is a"
+  rate_card_inclusion: "Includes escrow protection, dispute resolution, payment processing, and concierge support — all in one rate."
   worked_example:
     section_title: "What you net"
-    intro:         "On a $40,000 sale paid by wire:"
+    intro:         "A worked example, computed live from the rate schedule:"
     # The actual numbers are computed in Liquid from site.data.config —
     # this copy block only frames them.
+  # Buyer protection section (MODEL A — separate from the seller fee, never
+  # merged into one all-in number). LEGAL-GATED: rendered only when
+  # config.pricing.buyerProtectionFeePublished is true.
+  buyer_protection:
+    section_title:   "What you pay as a buyer"
+    section_intro:   >-
+                     On escrow sales, buyers pay a protection fee. It's the price
+                     of escrow and dispute protection — your money is held by a
+                     licensed partner until you confirm what you bought, and a
+                     real person handles it if something goes wrong.
+    escrow_only_note: "Applies only to escrow sales"
+    lite_note:       "Lite sales below the escrow threshold carry no buyer protection fee."
+  lite_vs_escrow:
+    section_title:   "Escrow and Lite"
+    body:            >-
+                     At or above the escrow threshold, every sale is an escrow
+                     sale: buyer funds are held by a licensed partner until
+                     handover is confirmed. Below it, sales are Lite — a lighter,
+                     no-escrow path with no buyer protection fee.
   faq_link:        "What's included?"
 
 # ---------- /trust (depth) ----------

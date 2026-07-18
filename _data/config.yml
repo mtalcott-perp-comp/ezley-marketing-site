@@ -1,22 +1,43 @@
-# Marketing-site config snapshot — last-known-good values from
+# Marketing-site config snapshot — display values that mirror
 # https://api.ezley.com/api/config/public.
 #
-# DO NOT hand-edit during normal operation. This file is overwritten by
-# scripts/fetch-config.sh in the GitHub Actions workflow. Values are read
-# from Liquid as {{ site.data.config.<key> }}.
+# DO NOT hand-edit during normal operation once a fetch script exists. Values
+# are read from Liquid as {{ site.data.config.<key> }}.
 #
-# Snapshot date: 2026-05-19 (initial scaffold; not yet fetched from a live API)
-# Source: ezley-docs/08-glossary.md §6 defaults
+# Snapshot date: 2026-07-18 — D-040 fee-model reconciliation.
+# The fee model is hand-authored in DOLLARS for display (the API expresses the
+# same values in cents). Source: D-040 (ezley-docs/09-decisions.md) and the API
+# Pricing:* options (SizeBrackets / SmallItemMinFeeCents / BuyerProtectionFee* /
+# LiteEscrowThresholdCents / listings.MinimumPrice).
 
 pricing:
-  cardTakeRatePct: 5.5
-  achTakeRatePct: 3.5
-  wireTakeRatePct: 3.0
+  # Seller fee by ticket size (D-040). Rail no longer prices anything;
+  # verification tier no longer changes price. Ordered, non-overlapping,
+  # exhaustive bands. maxAmount is the INCLUSIVE upper bound of the band in
+  # dollars; null = the unbounded top band. Boundary convention (ratified):
+  # the bottom band ("under $200") is exclusive, every higher boundary is
+  # inclusive — so exactly $200 -> 8.5%, $50,000 -> 8.5%, $150,000 -> 7%.
+  sellerFeeBands:
+    - { maxAmount: 200,    ratePct: 12,  minFee: 5 }   # under $200 — $5 floor
+    - { maxAmount: 50000,  ratePct: 8.5 }              # $200 – $50,000
+    - { maxAmount: 150000, ratePct: 7 }                # over $50,000 – $150,000
+    - { maxAmount: null,   ratePct: 5 }                # over $150,000
+
+  # Buyer protection fee (D-040) — charged to the BUYER on escrow sales only.
+  buyerProtectionFeePct: 2.5
+  buyerProtectionFeeCapDollars: 2500
+
+  # Legal gate (Track B, BLOCKED ON COUNSEL): the buyer-protection-fee copy is
+  # authored but stays DARK until counsel resolves the terms.md §8 rewrite and
+  # the §15 30-day material-change notice. Flip to true only on the effective
+  # date. While false, no public surface advertises the buyer fee.
+  buyerProtectionFeePublished: false
+
+  listingMinimumDollars: 20    # lowest sale price Ezley supports (free to list)
+  escrowMinAmount: 200         # $200 and up = escrow sale; below = Lite (no escrow)
 
 payments:
   autoReleaseHoursDefault: 72
-  wireOnlyMinAmount: 25000
-  cardMaxAmount: 5000
   depositPercentDefault: 10
 
 listings:

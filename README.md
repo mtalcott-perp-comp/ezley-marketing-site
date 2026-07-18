@@ -13,7 +13,7 @@ This repo serves the **marketing surface** at `about.ezley.com`:
 - Category front doors — `about.ezley.com/tractors`, `/cars`, `/cameras`, `/furniture` (sub-brand landing pages per [01-vision.md](../../ezley-docs/01-vision.md))
 - "How it works" — escrow, identity verification, dispute resolution, concierge
 - "Why Ezley" — head-to-head against eBay / Facebook Marketplace / Craigslist / TractorHouse / Machinery Pete
-- Pricing — path-tiered, single bundled rate (per [D-019](../../ezley-docs/09-decisions.md))
+- Pricing — ticket-size seller fee + buyer protection fee on escrow sales; free to list (per [D-040](../../ezley-docs/09-decisions.md), supersedes D-019)
 - Trust & safety — public dispute statistics, identity tiers, escrow flow
 - Agent-readiness — MCP / ACP / UCP / AP2 documentation surface
 
