@@ -2,30 +2,31 @@
 layout: landing
 permalink: /pricing/
 title: "Pricing"
-description: "Free to list. Pay only when you sell. One Ezley fee per payment path: 3.0% wire, 3.5% ACH, 5.5% card. No subscription. No listing fee. No surprises."
+description: "Free to list. Pay only when you sell. One clean seller fee that scales with your sale size — the bigger the sale, the lower the rate. No subscription. No listing fee. No surprises."
 ---
 {% assign copy = site.data.copy['en-US'].pricing %}
 {% assign cfg = site.data.config %}
 
 {% comment %}
-  /pricing — User Story 4 (P1).
+  /pricing — D-040 fee model (feature 002-fee-model-reconciliation).
 
-  FR-MKT-040: lede "Free to list. Pay only when you sell."
-  FR-MKT-041: three rate cards in order Wire → ACH → Card.
-  FR-MKT-042: percentages from cfg.pricing.* — NEVER hard-coded.
-  FR-MKT-043: inclusion line verbatim (P-14).
-  FR-MKT-044: P-14 grep test enforces zero matches for
-              Stripe / Connect / "concierge fee" / reserve / breakdown
-              in seller-facing copy.
-  FR-MKT-045: worked example fees computed at render time from config.
-  FR-MKT-046: Fee-details expander shows bundled rate + plain inclusion.
-  FR-MKT-048: links to /how-it-works/ and to Start-selling CTA.
+  Seller fee is set by TICKET SIZE, not payment path and not verification tier.
+  Four bands from cfg.pricing.sellerFeeBands (12% / 8.5% / 7% / 5%, $5 floor on
+  band 1). Every number renders from cfg.pricing.* — NEVER hard-coded (P-09).
 
-  Worked-example amounts chosen so fees come out to clean integers:
-    Wire: $40,000 × 3.0% = $1,200
-    ACH:  $10,000 × 3.5% = $350
-    Card:  $2,000 × 5.5% = $110
-  …whatever cfg.pricing.* values are, the math runs live.
+  Boundary convention (ratified): bottom band "under $200" is exclusive; every
+  higher boundary is inclusive. maxAmount is the inclusive upper bound of the
+  band (dollars); null = the unbounded top band. So $200 → 8.5%, $50,000 → 8.5%,
+  $150,000 → 7%. The per-card worked line prices each bounded band at its OWN
+  inclusive upper boundary (which lands in that band), so the math is always
+  boundary-correct and fully config-sourced.
+
+  MODEL A: the seller fee and the buyer protection fee live in SEPARATE
+  sections and are never merged into one "all-in" number.
+
+  LEGAL GATE: the buyer-protection-fee section renders only when
+  cfg.pricing.buyerProtectionFeePublished is true (Track B, BLOCKED ON COUNSEL —
+  the terms.md §8 rewrite + §15 30-day notice must clear first).
 {% endcomment %}
 
 <!-- ========================================================================
@@ -50,117 +51,130 @@ description: "Free to list. Pay only when you sell. One Ezley fee per payment pa
 </section>
 
 <!-- ========================================================================
-     RATE CARDS — FR-MKT-041..044 (Wire → ACH → Card; P-14 bundled)
+     SELLER FEE — ticket-size schedule (FR-FEE-001..006). Four bands from
+     cfg.pricing.sellerFeeBands; one clean number per band; no rail, no
+     verification-tier pricing, no itemization (P-14).
      ======================================================================== -->
-<section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-24" aria-labelledby="rate-cards-title">
-  <h2 id="rate-cards-title" class="sr-only">Ezley fee by payment path</h2>
-
-  <div class="grid md:grid-cols-3 gap-5">
-
-    <!-- Wire — most prominent (3.0%, the entry-tier rate per D-019) -->
-    <article class="bg-surface rounded-2xl border-2 border-primary p-7 relative
-                    hover:shadow-xl hover:-translate-y-1 transition-all duration-200">
-      <div class="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 text-xs font-bold uppercase tracking-wider bg-primary text-white rounded-full">
-        Most common
-      </div>
-
-      <h3 class="font-display font-semibold text-2xl text-ink mb-2">Wire</h3>
-      <p class="text-sm text-ink-muted mb-6">Best for high-value transactions ($25,000+)</p>
-
-      <div class="mb-6">
-        <span class="font-display font-bold text-6xl text-primary-ink leading-none">
-          {{ cfg.pricing.wireTakeRatePct }}<span class="text-3xl align-top">%</span>
-        </span>
-        <p class="text-sm text-ink-muted mt-2">of completed sale</p>
-      </div>
-
-      <p class="text-sm text-ink leading-relaxed mb-6">
-        {{ copy.rate_card_inclusion }}
-      </p>
-
-      <hr class="border-ink-border mb-6">
-
-      <div class="space-y-2 text-sm">
-        <div class="flex justify-between text-ink-muted">
-          <span>$40,000 sale</span>
-          <span class="text-ink font-semibold">at {{ cfg.pricing.wireTakeRatePct }}%</span>
-        </div>
-        <div class="flex justify-between font-semibold">
-          <span class="text-ink">Ezley fee</span>
-          <span class="text-primary-ink">${{ 40000 | times: cfg.pricing.wireTakeRatePct | divided_by: 100 }}</span>
-        </div>
-      </div>
-    </article>
-
-    <!-- ACH -->
-    <article class="bg-surface rounded-2xl border border-ink-border p-7
-                    hover:border-primary hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200">
-      <h3 class="font-display font-semibold text-2xl text-ink mb-2">ACH</h3>
-      <p class="text-sm text-ink-muted mb-6">Bank transfer, any amount</p>
-
-      <div class="mb-6">
-        <span class="font-display font-bold text-6xl text-primary-ink leading-none">
-          {{ cfg.pricing.achTakeRatePct }}<span class="text-3xl align-top">%</span>
-        </span>
-        <p class="text-sm text-ink-muted mt-2">of completed sale</p>
-      </div>
-
-      <p class="text-sm text-ink leading-relaxed mb-6">
-        {{ copy.rate_card_inclusion }}
-      </p>
-
-      <hr class="border-ink-border mb-6">
-
-      <div class="space-y-2 text-sm">
-        <div class="flex justify-between text-ink-muted">
-          <span>$10,000 sale</span>
-          <span class="text-ink font-semibold">at {{ cfg.pricing.achTakeRatePct }}%</span>
-        </div>
-        <div class="flex justify-between font-semibold">
-          <span class="text-ink">Ezley fee</span>
-          <span class="text-primary-ink">${{ 10000 | times: cfg.pricing.achTakeRatePct | divided_by: 100 }}</span>
-        </div>
-      </div>
-    </article>
-
-    <!-- Card -->
-    <article class="bg-surface rounded-2xl border border-ink-border p-7
-                    hover:border-primary hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200">
-      <h3 class="font-display font-semibold text-2xl text-ink mb-2">Card</h3>
-      <p class="text-sm text-ink-muted mb-6">Under ${{ cfg.payments.cardMaxAmount }}, when speed matters</p>
-
-      <div class="mb-6">
-        <span class="font-display font-bold text-6xl text-primary-ink leading-none">
-          {{ cfg.pricing.cardTakeRatePct }}<span class="text-3xl align-top">%</span>
-        </span>
-        <p class="text-sm text-ink-muted mt-2">of completed sale</p>
-      </div>
-
-      <p class="text-sm text-ink leading-relaxed mb-6">
-        {{ copy.rate_card_inclusion }}
-      </p>
-
-      <hr class="border-ink-border mb-6">
-
-      <div class="space-y-2 text-sm">
-        <div class="flex justify-between text-ink-muted">
-          <span>$2,000 sale</span>
-          <span class="text-ink font-semibold">at {{ cfg.pricing.cardTakeRatePct }}%</span>
-        </div>
-        <div class="flex justify-between font-semibold">
-          <span class="text-ink">Ezley fee</span>
-          <span class="text-primary-ink">${{ 2000 | times: cfg.pricing.cardTakeRatePct | divided_by: 100 }}</span>
-        </div>
-      </div>
-    </article>
+<section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-24" aria-labelledby="seller-fee-title">
+  <div class="max-w-2xl mx-auto text-center mb-12">
+    <h2 id="seller-fee-title" class="font-display font-bold text-3xl sm:text-4xl text-ink">
+      {{ copy.seller.section_title }}
+    </h2>
+    <p class="mt-4 text-ink-muted leading-relaxed">
+      {{ copy.seller.section_intro }}
+    </p>
   </div>
 
-  <p class="mt-10 text-center text-sm text-ink-muted max-w-2xl mx-auto">
-    Above ${{ cfg.payments.wireOnlyMinAmount }}, card payment is not offered &mdash;
-    wire and ACH are the path because they're safer and cheaper for transactions this size.
-    <a href="{{ '/trust/' | relative_url }}" class="text-primary hover:text-primary-dark underline underline-offset-4">Read why.</a>
+  <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+    {% assign bands = cfg.pricing.sellerFeeBands %}
+    {% assign prevMax = 0 %}
+    {% for band in bands %}
+      {%- comment -%} Range label, all bounds sourced from config. {%- endcomment -%}
+      {% if forloop.first %}
+        {% capture band_range %}Under ${% include usd.html amount=band.maxAmount %}{% endcapture %}
+      {% elsif band.maxAmount %}
+        {% capture band_range %}${% include usd.html amount=prevMax %} &ndash; ${% include usd.html amount=band.maxAmount %}{% endcapture %}
+      {% else %}
+        {% capture band_range %}Over ${% include usd.html amount=prevMax %}{% endcapture %}
+      {% endif %}
+
+      <article class="bg-surface rounded-2xl border p-7 flex flex-col
+                      {% if forloop.first %}border-2 border-primary{% else %}border-ink-border hover:border-primary{% endif %}
+                      hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200">
+        <p class="text-sm font-semibold text-ink-muted mb-4">{{ band_range }}</p>
+
+        <div class="mb-4">
+          <span class="font-display font-bold text-5xl text-primary-ink leading-none">
+            {{ band.ratePct }}<span class="text-2xl align-top">%</span>
+          </span>
+          <p class="text-sm text-ink-muted mt-2">{{ copy.seller.band_caption }}</p>
+        </div>
+
+        <div class="mt-auto pt-4 border-t border-ink-border text-sm">
+          {% if band.minFee %}
+            <div class="flex justify-between">
+              <span class="text-ink-muted">${% include usd.html amount=band.minFee %} {{ copy.seller.min_fee_note }}</span>
+            </div>
+          {% elsif band.maxAmount %}
+            <div class="flex justify-between text-ink-muted">
+              <span>${% include usd.html amount=band.maxAmount %} sale</span>
+              <span class="text-ink font-semibold">at {{ band.ratePct }}%</span>
+            </div>
+            <div class="flex justify-between font-semibold mt-1">
+              <span class="text-ink">Ezley fee</span>
+              {% assign band_fee = band.maxAmount | times: band.ratePct | divided_by: 100 %}
+              <span class="text-primary-ink">${% include usd.html amount=band_fee %}</span>
+            </div>
+          {% else %}
+            <div class="flex justify-between text-ink-muted">
+              <span>The lowest rate Ezley charges.</span>
+            </div>
+          {% endif %}
+        </div>
+      </article>
+      {% assign prevMax = band.maxAmount %}
+    {% endfor %}
+  </div>
+
+  <p class="mt-10 text-center text-base text-ink leading-relaxed max-w-2xl mx-auto">
+    {{ copy.rate_card_inclusion }}
+  </p>
+
+  <p class="mt-4 text-center text-sm text-ink-muted max-w-2xl mx-auto">
+    {{ copy.seller.listing_min_note }}
+    <strong class="text-ink">${% include usd.html amount=cfg.pricing.listingMinimumDollars %}</strong> sale price.
   </p>
 </section>
+
+<!-- ========================================================================
+     ESCROW vs LITE — the $200 boundary from config (FR-FEE-011 alignment).
+     ======================================================================== -->
+<section class="bg-surface-subtle border-y border-ink-border" aria-labelledby="lite-escrow-title">
+  <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 text-center">
+    <h2 id="lite-escrow-title" class="font-display font-bold text-2xl sm:text-3xl text-ink mb-4">
+      {{ copy.lite_vs_escrow.section_title }}
+    </h2>
+    <p class="text-ink-muted leading-relaxed">
+      At or above <strong class="text-ink">${% include usd.html amount=cfg.pricing.escrowMinAmount %}</strong>,
+      every sale is an escrow sale &mdash; buyer funds are held by a licensed
+      partner until handover is confirmed. Below it, sales are <strong class="text-ink">Lite</strong>:
+      a lighter, no-escrow path.
+    </p>
+  </div>
+</section>
+
+{% comment %}
+  BUYER PROTECTION FEE — MODEL A, SEPARATE section, LEGAL-GATED (dark until
+  cfg.pricing.buyerProtectionFeePublished flips true on the §8 effective date).
+{% endcomment %}
+{% if cfg.pricing.buyerProtectionFeePublished %}
+<section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-24" aria-labelledby="buyer-fee-title">
+  <div class="max-w-2xl mx-auto text-center mb-10">
+    <h2 id="buyer-fee-title" class="font-display font-bold text-3xl sm:text-4xl text-ink">
+      {{ copy.buyer_protection.section_title }}
+    </h2>
+    <p class="mt-4 text-ink-muted leading-relaxed">
+      {{ copy.buyer_protection.section_intro }}
+    </p>
+  </div>
+
+  <div class="max-w-md mx-auto bg-surface rounded-2xl border-2 border-primary p-8 text-center">
+    <span class="font-display font-bold text-6xl text-primary-ink leading-none">
+      {{ cfg.pricing.buyerProtectionFeePct }}<span class="text-3xl align-top">%</span>
+    </span>
+    <p class="text-sm text-ink-muted mt-3">
+      of the sale price, capped at
+      <strong class="text-ink">${% include usd.html amount=cfg.pricing.buyerProtectionFeeCapDollars %}</strong>
+    </p>
+    <hr class="border-ink-border my-6">
+    <p class="text-sm text-ink leading-relaxed">
+      {{ copy.buyer_protection.escrow_only_note }}
+      (${% include usd.html amount=cfg.pricing.escrowMinAmount %} and up).
+      {{ copy.buyer_protection.lite_note }}
+    </p>
+  </div>
+</section>
+{% endif %}
 
 <!-- ========================================================================
      FAQ — what's included (FR-MKT-046, P-14)
@@ -170,6 +184,20 @@ description: "Free to list. Pay only when you sell. One Ezley fee per payment pa
     <h2 id="faq-title" class="font-display font-bold text-3xl sm:text-4xl text-ink mb-10 text-center">
       What's included
     </h2>
+
+    <details class="bg-surface rounded-xl border border-ink-border p-6 mb-3 group">
+      <summary class="cursor-pointer flex items-center justify-between font-semibold text-ink">
+        <span>How is my seller fee calculated?</span>
+        <svg aria-hidden="true" class="h-5 w-5 text-ink-muted group-open:rotate-180 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+        </svg>
+      </summary>
+      <p class="mt-4 text-ink-muted leading-relaxed">
+        By the size of your sale &mdash; nothing else. The rate comes from the
+        sale price alone, not the payment method and not your verification tier.
+        The four bands above cover every sale.
+      </p>
+    </details>
 
     <details class="bg-surface rounded-xl border border-ink-border p-6 mb-3 group">
       <summary class="cursor-pointer flex items-center justify-between font-semibold text-ink">
@@ -186,6 +214,24 @@ description: "Free to list. Pay only when you sell. One Ezley fee per payment pa
         </p>
       </div>
     </details>
+
+    {% if cfg.pricing.buyerProtectionFeePublished %}
+    <details class="bg-surface rounded-xl border border-ink-border p-6 mb-3 group">
+      <summary class="cursor-pointer flex items-center justify-between font-semibold text-ink">
+        <span>Do buyers pay a fee?</span>
+        <svg aria-hidden="true" class="h-5 w-5 text-ink-muted group-open:rotate-180 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+        </svg>
+      </summary>
+      <p class="mt-4 text-ink-muted leading-relaxed">
+        On escrow sales, yes &mdash; a buyer protection fee of
+        {{ cfg.pricing.buyerProtectionFeePct }}%, capped at
+        ${% include usd.html amount=cfg.pricing.buyerProtectionFeeCapDollars %}.
+        It buys escrow and dispute protection. Lite sales below
+        ${% include usd.html amount=cfg.pricing.escrowMinAmount %} have no buyer fee.
+      </p>
+    </details>
+    {% endif %}
 
     <details class="bg-surface rounded-xl border border-ink-border p-6 mb-3 group">
       <summary class="cursor-pointer flex items-center justify-between font-semibold text-ink">
@@ -207,7 +253,7 @@ description: "Free to list. Pay only when you sell. One Ezley fee per payment pa
         </svg>
       </summary>
       <p class="mt-4 text-ink-muted leading-relaxed">
-        At payout time. Buyer pays the gross; we deduct the bundled Ezley fee
+        At payout time. The buyer pays the sale price; we deduct your Ezley fee
         before the funds settle to your account. You see one line, one number.
       </p>
     </details>
@@ -223,7 +269,7 @@ description: "Free to list. Pay only when you sell. One Ezley fee per payment pa
       Ready to list?
     </h2>
     <p class="mt-4 text-lg text-white/80 max-w-2xl mx-auto leading-relaxed">
-      No fee until you sell. One bundled rate. Honest.
+      No fee until you sell. One clean rate that scales with your sale. Honest.
     </p>
     <div class="mt-8 flex flex-wrap justify-center gap-3">
       <a class="inline-flex items-center justify-center h-12 px-7 rounded-lg font-semibold bg-white text-primary-ink hover:bg-surface-tint transition-colors"

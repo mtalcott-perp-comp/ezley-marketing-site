@@ -13,7 +13,7 @@ This site is the public brand surface at [about.ezley.com](https://about.ezley.c
 
 - [about.ezley.com](https://about.ezley.com): Brand surface, trust pitch, competitor contrast.
 - [How it works](https://about.ezley.com/how-it-works/): The buyer flow and seller flow end-to-end, glossary-strict.
-- [Pricing](https://about.ezley.com/pricing/): Bundled fee per payment path (Wire / ACH / Card). Free to list.
+- [Pricing](https://about.ezley.com/pricing/): Seller fee by sale size (larger sales, lower rate); free to list; $20 listing minimum. Escrow sales include buyer protection.
 - [Trust & Safety](https://about.ezley.com/trust/): Identity tiers, escrow flow, dispute process.
 - [For agents](https://about.ezley.com/agents/): Agent-native posture, protocol implementation status, discovery surface.
 
@@ -33,7 +33,7 @@ This site is the public brand surface at [about.ezley.com](https://about.ezley.c
 
 ## Marketplace API
 
-- [Public config](https://api.ezley.com/api/config/public): Read-only configuration (pricing rates, payment thresholds, listing policy). Powers the rates shown on /pricing.
+- [Public config](https://api.ezley.com/api/config/public): Read-only configuration (ticket-size seller fee schedule, buyer protection fee, escrow threshold, listing policy). Powers the rates shown on /pricing.
 - [Public listings catalog](https://api.ezley.com): Available at the marketplace app and via the agent endpoints above. The marketing site itself does not list or browse.
 
 ## Optional
